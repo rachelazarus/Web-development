@@ -1,0 +1,84 @@
+Database name : Electronic_Health_Information_System
+
+Tables
+
+Patients{
+Patient_id var
+Profile_picture_path var
+Fullname var
+Age int
+Email var
+Contact_number var
+password
+Number_of_records_entries_int
+}
+
+Doctors{
+Doctors_id var
+Profile_picture_path var
+Fullname var
+Age var
+Specialization var
+Contact_number var
+email var
+hire_date DATETIME
+password
+Availability boolean(true = available, false=unavailable )
+Number_of_patient_record_entries int
+}
+
+
+Patient_record_entries{
+Record_entry_id Auto increment
+Temperature
+Weight
+Sickness description
+Diagnoses
+Prescriptions
+Patient_id (Foriegn key references Patients record(Patient_id) )
+Doctor's_ID foreign key references (Doctors(Doctors_id))
+Date_of_entry DATETIME
+}
+
+Apointments{
+    Apointment_ID auto_increment int,
+    Year
+    Month
+    TimeSlot
+    patient_id foreign references Patients(patient_id)
+    doctor_id foreign references Doctors(Doctors_id)
+}
+
+Okay so @~N🤍 , @~Taapopi , @~Deon  and I met up and discussed the overall structure of the project we decided to have 3 main users with the following functionalities:
+ 
+ PATIENT:
+-Can sign up, or login
+-View their record, and record entries
+-Book an apointment with a doctor
+--view their apointments
+
+ DOCTOR:
+ Can log_in
+-Can view patient records and record entries
+-Can search for a patient
+-Add a record entry to a patients record
+- View their apointments
+ 
+ ADMIN:
+ -Can view patient records but not record entries
+ -Can search for a patient
+ -Can delete a patient
+ -Add Doctors
+ -View Doctors
+ -Search for Doctors
+ -Delete doctors 
+ - View Apointments
+
+ 
+So since we are are 9 I was thinking that 3 deal with the Doctos side including  @Taapopi , 2 deal with the Patient side including @Deon and then 4 deal with the Admin side including me and @N 
+since we are the ones that know the structure and  can explain to the others
+
+ I created an overall project structure that Ill commit on git with the Doctor's, Patient and Admin side in separated folders with each folder having its own css file and php files.
+so that the 3 working on the doctors can discuss their css and html format and commit , the 2 working on the patient do the same and the other 4 working on the admin can do the same
+
+the main colour is blue specifically 
