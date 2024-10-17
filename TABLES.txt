@@ -49,8 +49,7 @@ Apointments{
     doctor_id foreign references Doctors(Doctors_id)
 }
 
-Okay so @~N🤍 , @~Taapopi , @~Deon  and I met up and discussed the overall structure of the project we decided to have 3 main users with the following functionalities:
- 
+
  PATIENT:
 -Can sign up, or login
 -View their record, and record entries
@@ -75,10 +74,3 @@ Okay so @~N🤍 , @~Taapopi , @~Deon  and I met up and discussed the overall str
  - View Apointments
 
  
-So since we are are 9 I was thinking that 3 deal with the Doctos side including  @Taapopi , 2 deal with the Patient side including @Deon and then 4 deal with the Admin side including me and @N 
-since we are the ones that know the structure and  can explain to the others
-
- I created an overall project structure that Ill commit on git with the Doctor's, Patient and Admin side in separated folders with each folder having its own css file and php files.
-so that the 3 working on the doctors can discuss their css and html format and commit , the 2 working on the patient do the same and the other 4 working on the admin can do the same
-
-the main colour is blue specifically 
