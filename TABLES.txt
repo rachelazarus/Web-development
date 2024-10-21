@@ -25,6 +25,7 @@ hire_date DATETIME
 password
 Availability boolean(true = available, false=unavailable )
 Number_of_patient_record_entries int
+Description LONGTEXT
 }
 
 
@@ -44,6 +45,7 @@ Apointments{
     Apointment_ID auto_increment int,
     Year
     Month
+    Day
     TimeSlot
     patient_id foreign references Patients(patient_id)
     doctor_id foreign references Doctors(Doctors_id)
