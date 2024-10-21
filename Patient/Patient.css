@@ -1,0 +1,222 @@
+:root {
+    --maincolor: #2ec8a6;
+    --secondcolor: #f8a803;
+    --thirdcolor: #f4ab01;
+    --textcolor: #4a5764;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    outline: none;
+    border: none;
+    text-decoration: none;
+    transition: all 200ms linear;
+}
+
+html {
+    font-size: 1rem;
+    scroll-behavior: smooth;
+    scroll-padding: 6rem;
+}
+
+body, main {
+    min-height: 100vh;
+}
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: space-between;
+    padding: 1.5rem 7%;
+    align-items: center;
+    width: 100%;
+    box-shadow: 0 0.5rem 1.7rem rgba(0, 0, 0, 1);
+    z-index: 1000;
+    background-color: white;
+}
+
+nav, .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+    font-size: 1.7rem;
+}
+
+a {
+    color: var(--textcolor);
+    position: relative;
+}
+
+a::after {
+    content: "";
+    background-color: var(--secondcolor);
+    height: 0.2rem;
+    position: absolute;
+    left: 0;
+    bottom: -1rem;
+    transition: width 0.3s ease;
+}
+
+a:hover::after {
+    width: 100px;
+}
+
+.logo img {
+    width: 110px;
+}
+
+#menu-bars {
+    color: var(--maincolor);
+    font-size: 2.5rem;
+    cursor: pointer;
+    display: none;
+}
+
+.right-icons .btn {
+    padding: 1rem;
+    font-size: 1rem;
+    color: var(--textcolor);
+    border: 0.2rem solid var(--textcolor);
+    cursor: pointer;
+}
+
+.right-icons .btn:hover {
+    color: var(--maincolor);
+}
+
+.main-home {
+    background-image: url(./images/blurbg1.jpg);
+    width: 100%;
+    height: 100vh; /* Ensures the image covers the entire height of the screen */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative; /* Necessary for absolute positioning of the login */
+}
+
+.main-home {
+    display: flex;
+    color: black;
+    text-align: left;
+    align-items: center;
+    font-size: 1.2rem;
+    padding: 2rem;
+    z-index: 1;
+}
+
+.login {
+    position: absolute;
+    top: 50%;
+    right: 5%;
+    transform: translateY(-50%); /* Vertically center the container */
+    z-index: 2;
+}
+
+.login-container {
+    padding: 2.5rem; /* Adjust padding to prevent excess space */
+    border-radius: 5px;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 1);
+    background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
+    width: 250px; /* Increase width for a larger container */
+    height: 350px; /* Increase height to make the container taller */
+    margin-top: 1rem;
+}
+
+.input-group label{
+    width: 100;
+    font-size: 1.5rem;
+    color: #555;
+    text-align: left;
+}
+
+.input-group, h1{
+    
+    color: var(--maincolor);
+    font-size: large;
+}
+
+.input-group input{
+    flex: 1;
+    padding: 0.8rem;
+    border: 1rem solid #ddd;
+    background-color: #fff;
+    color: #333;
+}
+.input-group a:hover{
+background-color: var(--maincolor);
+}
+
+.login-btn {
+    width: 30%;
+    padding: 0.8rem;
+    margin: 1rem;
+    background-color: var(--secondcolor);
+    color: var(--textcolor);
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.3rem;
+}
+
+.login-btn:hover {
+    background-color: #25a489;
+}
+
+
+
+.input-group input, .input input {
+    width: 100%;
+    padding: 0.8rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    html {
+        font-size: 60%;
+    }
+
+    .right-icons {
+        display: flex;
+        align-items: center;
+    }
+
+    header {
+        padding: 2rem;
+    }
+
+    #menu-bars {
+        display: initial;
+    }
+
+    .navbar {
+        position: absolute;
+        top: 100%;
+        left: 100%;
+        height: 100vh;
+        width: 100%;
+    }
+
+    .navbar.active {
+        left: 0;
+    }
+
+    .navbar a {
+        display: block;
+        margin: 2rem;
+        padding: 1rem;
+        border: 1px solid var(--textcolor);
+        text-align: center;
+    }
+}
