@@ -103,6 +103,9 @@
 
             <div class="form-btn">
                 <input type="submit" class="btn btn-primary" value="Register" name="submit">
+            <div class="form-btn">
+            <a href="../login/Patient.php" id="btn" class="btn btn-primary">Back</a>
+
             </div>
         </form>
     </div>

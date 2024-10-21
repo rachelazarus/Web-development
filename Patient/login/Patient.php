@@ -4,16 +4,15 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
   <script src="https://kit.fontawesome.com/c1df782baf.js"></script>
-  <link rel="stylesheet" href="Patient.css">
+  <link rel="stylesheet" href="./Patient.css">
   <title>Hostpital management system</title>
 </head>
 
 <body>
   <header>
     <div class="logo">
-      <img src="./images/logo2.png" alt="Hostpital logo" />
+      <img src="../images/logo2.png" alt="Hostpital logo" />
     </div>
 
     <nav class="navbar">
@@ -26,7 +25,7 @@
 
     <div class="right-icons">
       <div id="menu-bars" class="fas fa-bars"></div>
-      <div class="btn" id="#">SignUp</div>
+      <div class="btn" id="#">Login</div>
     </div>
   </header>
 
@@ -51,28 +50,56 @@
       </div>
     </div>
 
-
+  
 
     <section class="login">
+
+    
       <div class="login-container">
         <h1>Login</h1>
         <br>
+        <?php
+if(isset($_POST['login'])){
+    $email = $_POST["Email"];  // Changed to match form field names
+    $password = $_POST["password"];
+
+    // Changed to match form field names
+
+    require_once "../registerForm/database.php";  // Ensure the correct path to the file
+    $sql = "SELECT * FROM patients WHERE Email = '$email'";
+    $result = mysqli_query($conn, $sql);
+    $patient = mysqli_fetch_assoc($result);  // Fetch a single row
+
+    if($patient){
+        if(password_verify($password, $patient["EncryptedPassword"])){
+            header("Location: index.php");
+            die(); 
+        } else {
+            echo "<div class='alert-danger'>Password does not match</div>";
+        }
+    } else {
+        echo "<div class='alert-danger'>Email does not match</div>";
+    }
+}
+?>
         <div class="input-group">
-          <form action="/action" method="post">
+          <form action="./Patient.php" method="post">
             <label for="email">Email</label>
-            <input type="text" id="email" name="email" required placeholder="example@gmail.com">
+            <input type="text" id="email" name="Email" required placeholder="example@gmail.com">
 
             <label for="password"> password</label>
-            <input type="password" name="password" id="password" required placeholder="********">
+            <input type="password" name="password" id="EncryptedPassword" required placeholder="********">
         </div>
-        <a href="#forgotPassword">Forgot password</a>
-        <button class="login-btn" type="submit">Login</button>
+        <a href="../login/forgotPassword.php">Forgot password</a>
+        <button class="login-btn" value="Login" name="login" type="submit">Login</button>
+
+        <a href="../registerForm/register.php" class=>Register</a>
         </form>
       </div>
     </section>
   </main>
 
-  <script src="Patient.js"></script>
+  <script src="./Patient.js"></script>
 </body>
 
 </html>

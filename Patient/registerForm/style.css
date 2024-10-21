@@ -9,3 +9,8 @@
     margin-bottom: 30px;
     text-align: left;
 }
+
+.btn{
+    align-items: center;
+    margin: 1rem;
+}
