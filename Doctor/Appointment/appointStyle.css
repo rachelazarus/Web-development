@@ -1,0 +1,122 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+body {
+    
+    background-color: #f4f4f4;
+}
+
+.navbar {
+    background-color: #0097A7;
+    padding: 20px;
+    text-align: center;
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+}
+
+.navbar li {
+    margin: 0 20px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 10px;
+    background-color: #0089A3;
+    border-radius: 20px;
+}
+
+.navbar ul li a:hover {
+    background-color: #006978;
+}
+
+
+/* Main Container */
+.container {
+
+    display: flex;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 70px auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Profile Section */
+.profile {
+    flex: 1;
+    text-align: center;
+    padding-right: 40px;
+    border-right: 1px solid #ddd;
+}
+
+.profile-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.contact-info {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+}
+
+/* Appointment Section */
+.appointment {
+    flex: 2;
+    padding-left: 40px;
+}
+
+.appointment h3 {
+    font-size: 1.4em;
+    margin-bottom: 10px;
+}
+
+.description-box {
+    background-color: #0097A7;
+    padding: 20px;
+    border-radius: 10px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.appointment-time {
+    background-color: #78909C;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    color: white;
+}
+
+.cancel-button {
+    background-color: #FF5252;
+    border: none;
+    padding: 10px 30px;
+    color: white;
+    border-radius: 20px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 1em;
+}
+
+.cancel-button:hover {
+    background-color: #D32F2F; /* Change to a darker red on hover */
+}
