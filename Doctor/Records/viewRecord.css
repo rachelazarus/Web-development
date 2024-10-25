@@ -1,0 +1,151 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+header{
+    display: flex;
+    background-color: #007d8c;
+    padding: 20px;
+    justify-content: center;
+   
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+nav ul{
+    
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #506773;
+}
+
+nav ul li a:hover {
+    background-color: #3b4f56;
+    color: #647c7e; /* Change text color on hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+main{
+    margin: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.profile{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-pic{
+    border-radius: 50%;
+    overflow: hidden;
+    width: 150px;
+    height: 150px;
+    margin-bottom: 1rem;
+}
+
+.profile-pic img {
+    width: 100%;
+    height: auto;
+}
+
+.profile-info h2 {
+    margin-bottom: 0.5rem;
+}
+
+.profile-info p {
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.profile-pic:hover img {
+    transform: scale(1.1); /* Slight zoom-in effect */
+    transition: transform 0.3s ease;
+}
+
+
+.records{
+    background-color: #e0e0e0;
+    padding:2rem;
+    border-radius: 8px;
+    width: 400px;
+ 
+}
+
+.record-item {
+    margin-bottom: 1rem;
+}
+
+.record-item label {
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.record-item input,
+.record-item textarea {
+    width: 100%;
+    padding: 0.5rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.record-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 1.5rem;
+}
+
+.records:hover {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: box-shadow 0.3s ease;
+}
+
+
+.record-controls button {
+    padding: 0.75rem 1.5rem;
+    background-color: #007d8c;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.record-controls button:hover {
+    background-color: #005f6a;
+    transform: scale(1.05); /* Slightly increase size */
+    color: #ffffff;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+
+label {
+    font-weight: bold;
+}
+

@@ -1,0 +1,131 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+body{
+    background-color: #f0f0f0;   
+}
+
+
+
+header{
+    display: flex;
+    background-color: #007d8c;
+    padding: 20px;
+    justify-content: center;
+   
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.5rem;
+}
+
+nav ul{
+    
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a{
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #506773;
+}
+
+nav ul li a:hover {
+    background-color: #3b4f56;
+    color: #647c7e; /* Change text color on hover */
+    transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
+}
+
+.container {
+    display: flex;
+    width: 900px;
+    background-color: #9BB5CC;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    margin: 100px;
+    margin-top: 50px;
+    margin-left: 250px;
+    justify-content: center;
+  
+}
+
+/* Left Section */
+.left-section {
+    flex: 1;
+    background-color: #89ABD0;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;    
+}
+
+.left-section label {
+    font-weight: bold;
+}
+
+.left-section input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #e0e0e0;
+ 
+}
+
+.submit-btn {
+    padding: 15px;
+    background-color: #3e9c5d;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    margin-top: 20px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background-color: #3b4f56;
+}
+
+/* Right Section */
+.right-container {
+    flex: 2;
+    background-color: #5F8095;
+    padding: 20px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.right-container label {
+    font-weight: bold;
+}
+
+.right-container textarea {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+    background-color: #e0e0e0;
+    resize: none;
+}
