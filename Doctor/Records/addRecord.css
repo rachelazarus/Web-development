@@ -16,7 +16,7 @@ body{
 
 header{
     display: flex;
-    background-color: #007d8c;
+    background-color: #00A5B7;
     padding: 20px;
     justify-content: center;
    
@@ -47,7 +47,7 @@ nav ul li a{
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 20px;
-    background-color: #506773;
+    background-color: #0089A3;
 }
 
 nav ul li a:hover {

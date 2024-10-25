@@ -9,7 +9,7 @@
 
 header{
     display: flex;
-    background-color: #007d8c;
+    background-color: #00A5B7;
     padding: 20px;
     justify-content: center;
    
@@ -40,11 +40,11 @@ nav ul li a{
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 20px;
-    background-color: #506773;
+    background-color: #0089A3;;
 }
 
 nav ul li a:hover {
-    background-color: #3b4f56;
+    background-color: #006978;
     color: #647c7e; /* Change text color on hover */
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
