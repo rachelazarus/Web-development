@@ -1,0 +1,164 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif
+}
+
+nav {
+    background-color: #0A8280;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between; 
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between; 
+}
+
+
+.left-links {
+    display: flex;
+    flex: 2; 
+    justify-content: center; 
+}
+
+.left-links li {
+    margin-right: 20px;
+}
+
+.left-links li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #506773;
+}
+
+.left-links li a:hover {
+    background-color: #3b4f56;
+}
+
+/* Right side (Log Out button) */
+.right-link {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.right-link li a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #71D9D5;
+}
+
+.right-link li a:hover {
+    background-color: #55b7b3;
+}
+
+.search-form{
+  
+    width: 90%;
+    max-width: 400px;
+    margin: auto;
+    height: 60px;
+    background: #e0e0ee;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 80px;
+}
+
+.search-form input{
+    flex: 1;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 16px; /* Slightly smaller font */
+    padding: 0 20px; /* Adjusted padding */
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px; /* Rounded corners for input */
+}
+
+.search-form button{
+    padding: 0 30px;
+    height: 100%;
+    background:#71D9D5;
+    color: #000000;
+    font-size: 16px;
+    border: 0;
+    outline: 0;
+    border-top-right-radius:30px;
+    border-bottom-right-radius: 30px;
+    cursor: pointer;
+}
+.search-form button:hover{
+    background: #285a8e; /* Darker shade for hover */
+    color: #ffffff;     
+}
+
+/*-----------------------patient info------------*/
+.patient-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+}
+
+.patient-card {
+    background-color: #d3d3d3;
+    padding: 20px;
+    border-radius: 10px;
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.patient-name {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.view-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    background-color: #4e7d9e;
+    color: white;
+}
+
+/* Add Section */
+.add-section {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.add-button {
+    padding: 10px 30px;
+    border: none;
+    border-radius: 20px;
+    background-color: #5ed0d0;
+    color: white;
+    cursor: pointer;
+}
