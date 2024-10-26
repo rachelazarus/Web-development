@@ -462,6 +462,7 @@ li {
 .table {
     height: 200px;
     overflow-y: scroll;
+    overflow-x: scroll;
 }
 
 table {
@@ -529,12 +530,6 @@ h2.A-title{
 
 }
 
-/* Style the container */
-.date-picker-container {
-    position: relative;
-    display: inline-block;
-    color: #4f4f4f;
-}
 
 
 .date-filter{
@@ -546,10 +541,59 @@ h2.A-title{
 #date-filter-input {
     padding: 10px;
     border-radius: 5px;
+    border: 1px solid white;
     cursor: pointer;
+    background-color: #6c89ff9a;
+  
+}
+
+ 
+
+.deletediv {
+    background-color: #ffffff;
+    border-radius: 50px;
+    width: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-bottom: 20px;
+}
+
+.delete-btn {
+    background-color: white;
+    outline: none;
+    border: none;
+    width: 20%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    cursor: pointer;
+
+}
+
+.delete {
+    border-radius: 50%;
+    font-size: large;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1;
+    padding-bottom: 60px;
+ 
+}
+
+.delete:hover{
+    color: #ff2323;
 }
 
 
+.docImg{
+    border-radius: 100%;
+    width: 30px;
+    height: 30px;
+}
 /* responsive starts here */
 
 @media screen and (max-width:1350px) {
