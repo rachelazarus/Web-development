@@ -73,7 +73,7 @@ if(isset($_POST['login'])){
 
     if($patient){
         if(password_verify($password, $patient["EncryptedPassword"])){
-            header("Location: index.php");
+            header("Location:../patientView/Patientview.php");
             die(); 
         } else {
             echo "<div class='alert-danger'>Password does not match</div>";

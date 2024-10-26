@@ -35,6 +35,7 @@ document.getElementById('appointment-search').addEventListener('input', function
 });
 
 
+
 document.getElementById('date-filter-input').addEventListener('change', function() {
     let selectedDate = this.value;
     let tableRows = document.querySelectorAll('#appointments-table tbody tr');
@@ -42,5 +43,25 @@ document.getElementById('date-filter-input').addEventListener('change', function
     tableRows.forEach(row => {
         let dateCell = row.children[2].innerText; // Get the date cell (3rd column)
         row.style.display = dateCell === selectedDate ? '' : 'none';
+    });
+});
+
+document.querySelectorAll('.delete-btn').forEach(button => {
+    button.addEventListener('click', function() {
+        let appointmentId = this.dataset.id;
+        if (confirm("Are you sure you want to delete this appointment?")) {
+            fetch('delete.php', {
+                method: 'POST',
+                body: new URLSearchParams({ 'id': appointmentId })
+            })
+            .then(response => response.text())
+            .then(result => {
+                if (result === 'success') {
+                    this.closest('tr').remove(); // Remove the row from the table
+                } else {
+                    alert("Failed to delete the appointment.");
+                }
+            });
+        }
     });
 });

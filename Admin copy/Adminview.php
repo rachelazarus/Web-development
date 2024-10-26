@@ -25,6 +25,8 @@ $available_doctors_result = mysqli_query($conn, $available_doctors_query);
 $today_year = date("Y");
 $today_month = date("m");
 $today_day = date("d");
+$data = json_decode(file_get_contents("php://input"));
+
 
 // Query to fetch today's appointments
 $today_appointments_query = "
@@ -47,22 +49,12 @@ $appointmentsall_query = "
     JOIN doctors d ON a.doctor_id = d.Doctors_id";
 $appointments_result = mysqli_query($conn, $appointmentsall_query);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $appointment_id = $_POST['id'];
+// Fetch all doctors
+$doctors_query = "
+    SELECT Doctors_id, Profile_picture_path, Fullname, Specialization, Contact_number, email, Availability 
+    FROM doctors";
+$doctors_result = mysqli_query($conn, $doctors_query);
 
-    $delete_query = "DELETE FROM apointments WHERE Apointment_ID = ?";
-    $stmt = $conn->prepare($delete_query);
-    $stmt->bind_param("i", $appointment_id);
-
-    if ($stmt->execute()) {
-        echo "success";
-    } else {
-        echo "error";
-    }
-
-    $stmt->close();
-    $conn->close();
-}
 
 ?>
 
@@ -220,7 +212,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         </div>
         
         <!-- Appointments View -->
-        <div class="main--content" id="appointments-view" style="display: none;">
+    <div class="main--content" id="appointments-view" style="display: none;">
         <h2 class="A-title">Appointments</h2>
         <div class="table-controls">
         <div class="search">
@@ -230,10 +222,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
          
         <div class="date-filter">
         <h5>Filter by date</h5>
-            <input type="date" id="date-filter-input" placeholder="date">
+            <input class ="date-filter-input" type="date" id="date-filter-input" placeholder="date" title="Choose filter date">
             
         </div>
-    </div>
+      </div>
             
         <table id="appointments-table">
         <thead>
@@ -253,8 +245,66 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <td><?php echo $appointment['Year'] . '-' . $appointment['Month'] . '-' . $appointment['Day']; ?></td>
                 <td><?php echo $appointment['TimeSlot']; ?></td>
                 <td>
+                        <div class="deletediv">
+                          <button class="delete-btn" data-id="<?php echo $appointment['Apointment_ID']; ?>" title="Delete Appointment">
+                            <i class="ri-delete-bin-line delete"></i>
+                          </button>
+                          </div>
+                </td>
+
+                
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+         </table>
+
+     </div>
+    </div>
+        
+        <!-- Doctors View -->
+        <div class="main--content" id="doctors-view" style="display: none;">
+        <div class="table-controls">
+        <div class="search">
+            <input type="text" id="doctor-search" placeholder="Search doctors...">
+            <button><i class="ri-search-2-line"></i></button>
+        </div>
+        <div class="add-doctor">
+            <button id="add-doctor-btn"><i class="ri-add-line"></i> Add Doctor</button>
+        </div>
+
+        <table id="doctors-table" class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Specialization</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Availability</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($doctor = mysqli_fetch_assoc($doctors_result)): ?>
+            <tr>
+
+                <td><?php echo $doctor['Fullname']; ?></td>
+                <td><?php echo $doctor['Specialization']; ?></td>
+                <td><?php echo $doctor['Contact_number']; ?></td>
+                <td><?php echo $doctor['email']; ?></td>
+                <td><?php echo $doctor['Availability'] ? 'Available' : 'Unavailable'; ?></td>
+                <td>
+                  <div>
+                  <button class="view-btn" data-id="<?php echo $doctor['Doctors_id']; ?>" title="View Doctor">
+                        <i class="ri-eye-line"></i>
+                    </button>
+                    <div class="deletediv"> <button class="delete-btn" data-id="<?php echo $doctor['Doctors_id']; ?>" title="Delete Doctor">
+                        <i class="ri-delete-bin-line"></i>
+                    </button></div>
+
+                  </div>
+                   
                     
-                    <button class="delete-btn" data-id="<?php echo $appointment['Apointment_ID']; ?>">Delete</button>
                 </td>
             </tr>
             <?php endwhile; ?>
@@ -262,17 +312,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </table>
 
 
-</div>
-        </div>
-        
-        <!-- Doctors View -->
-        <div class="main--content" id="doctors-view" style="display: none;">
-        <div class="search">
-                <input type="text" placeholder="Search do">
-                <button><i class="ri-search-2-line"></i></button>
-            </div>
-            <h2>Doctors</h2>
-            <p>Details about doctors.</p>
+    </div>
+           
+
+
         </div>
 
         <!-- Doctors View -->
