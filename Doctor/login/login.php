@@ -34,24 +34,22 @@
             
             <h2>LOGIN</h2>
            
-            <form action="submit.php" method="post">
+            <form action="loginSubmit.php" method="post">
                 
                 <div class="input-box">
                     <i class="fas fa-user"></i>
-                    <input type="text" placeholder="Enter First Name">
+                    <input type="text" name="username" placeholder="Enter First Name" required>
                 </div>
 
                 <div class="input-box">
                     <i class="fas fa-lock"></i>
-                    <input type="password" placeholder="Password">
+                    <input type="password" name="password" placeholder="Password" required>
                 </div>
 
                 <button type="submit" class="submit-btn">LOGIN</button>
             </form>
         </div>
-
-      
-
+        
     </section>
 </body>
 </html>
