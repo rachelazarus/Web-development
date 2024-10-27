@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Make an Appointment</title>
     <link rel="stylesheet" href="appointment.css">
 </head>
+
 <body>
     <header>
         <div class="logo">
@@ -20,15 +22,15 @@
         </nav>
         <div class="back">
             <a href="./Patientview.php"></a>
-            
+
         </div>
     </header>
 
-    <br> <br>
+    <!-- <br> <br> <br> <br> -->
     <main>
-        <h1>MAKE AN APPOINTMENT</h1>
-        
-        <form action="appointment.php" method="POST">
+        <h1 class="topic">MAKE AN APPOINTMENT</h1>
+
+        <form action="./process-form.php" method="POST">
             <!-- Full Name -->
             <div class="form-group">
                 <label for="fullname">Full Name:</label>
@@ -39,6 +41,17 @@
             <div class="form-group">
                 <label for="age">Age:</label>
                 <input type="number" id="age" name="age" required>
+            </div>
+
+            <div class="form-group">
+                <label for="gender">Gender:</label>
+                <select name="gender" id="gender" required>
+                    <option value="0" disabled selected>Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+
             </div>
 
             <!-- Email -->
@@ -64,19 +77,21 @@
                 <label for="timeslot">Time Slot:</label>
                 <input type="time" id="timeslot" name="timeslot" required>
             </div>
-<br>
+            <br>
             <!-- Symptoms -->
-             <div class="from-group">
-             <label for="symptoms" class="symptoms">Symptoms:</label>
-             <textarea id="symptoms" name="symptoms" rows="4" placeholder="Describe your symptoms here" required></textarea>
+            <div class="form-group">
+                <label for="symptoms" class="symptoms">Symptoms:</label>
+                <textarea id="symptoms" name="symptoms" rows="4" placeholder="Describe your symptoms in detail..." required></textarea>
             </div>
 
             <!-- Buttons -->
             <div class="form-group">
-                <button type="submit">Make Appointment</button>
-            </div><button type="button" class="back-button" onclick="history.back()">Back</button>
+                <button type="submit"  name="submit" >Make Appointment</button>
+            </div>
+            <button type="button" class="back-button" onclick="history.back()">Back</button>
         </form>
-        
+
     </main>
 </body>
+
 </html>

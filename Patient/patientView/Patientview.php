@@ -17,7 +17,7 @@
     </div>
     <nav class="navbar">
       <ul class="nav-links">
-        <li><a href="#home">Home</a></li>
+        <li><a href="../login/Patient.php">Home</a></li>
         <li><a href="#About">About</a></li>
         <li><a href="#Contact">Contact</a></li>
       </ul>
