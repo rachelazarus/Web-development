@@ -25,6 +25,7 @@ hire_date DATETIME
 password
 Availability boolean(true = available, false=unavailable )
 Number_of_patient_record_entries int
+Description
 }
 
 
