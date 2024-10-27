@@ -21,9 +21,9 @@
     </nav>
   </header>
 
-<form action="Doctor.php" method="post" class="search-form">
-    <input type="tex " id="search-box" placeholder="search for a patient">
-    <button>Search</button>
+  <form action="Searchrecord.php" method="GET" class="search-form">
+    <input type="text" id="search-box" name="search-box" placeholder="Search for a patient" required>
+    <button type="submit">Search</button>
 </form>
 
    <!-- Patient Records Section -->
@@ -47,10 +47,5 @@
 
     </section>
 
-    <section id="add-section" class="add-section" style="display:none;">
-        <button class="add-button" onclick="addPatient()">ADD New Patient</button>
-    </section>
-
-    <script type="text/javascript" src="Doctor.js"></script>
 </body>
 </html>

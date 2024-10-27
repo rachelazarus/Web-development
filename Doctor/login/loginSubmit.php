@@ -3,6 +3,7 @@
 include '../DBconnect.php';
 
 if ($_SERVER['REQUEST_METHOD']=='POST') {
+    session_start();
 
     $username = mysqli_real_escape_string($conn, $_POST['username']);
     $password = $_POST['password'];
@@ -15,12 +16,13 @@ if ($_SERVER['REQUEST_METHOD']=='POST') {
 
     if($row = mysqli_fetch_assoc($result)){
 
-        if(password_verify($password, $row['password'])){
-            session_start();
-            $_SESSION['username'] = $username;
-            header("Location: ../Homapage/DoctorHomepage.html");
+        if(password_verify($password, $row['Password'])){
+           
+            $_SESSION['username'] = $row['Fullname'];
+            header("Location: ../Homepage/DoctorHomepage.php");
             exit;
         } else {
+           
             echo "<script>alert('Incorrect password.'); window.history.back();</script>";
             exit;
         }

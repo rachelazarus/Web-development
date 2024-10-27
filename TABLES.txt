@@ -23,7 +23,7 @@ Contact_number var
 email var
 hire_date DATETIME
 password
-Availability boolean(true = available, false=unavailable )
+Availability boolean(true = avail able, false=unavailable )
 Number_of_patient_record_entries int
 }
 

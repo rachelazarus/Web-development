@@ -3,7 +3,7 @@
 $hostName = "localhost";
 $dbUser = "root";
 $dbPassword = "";
-$dbName = "Electronic_Health_Information_System";
+$dbName = "electronic_Health_Information_System";
 
 $conn = mysqli_connect($hostName, $dbUser, $dbPassword, $dbName);
 
