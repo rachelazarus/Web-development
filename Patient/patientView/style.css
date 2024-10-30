@@ -31,6 +31,8 @@ header {
     box-shadow: 0 0.5rem 1.7rem rgba(0, 0, 0, 0.1);
     z-index: 1000;
     background-color: white;
+    z-index: 1000;
+    background-color: white;
 }
 
 .nav-links {
@@ -70,6 +72,17 @@ a:hover::after {
     align-items: center;
     padding-top: 8rem;
     padding-left: 2rem;
+    background-image: url(../images/backgroung-pattern-1.png);
+}
+
+.profile-picture{
+    background-image: url(../images/backgroung-pattern-1.png);
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
 }
 
 .profile-picture {
@@ -117,6 +130,26 @@ a:hover::after {
     font-size: 1rem;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.about-us-container{
+    position: relative;
+    left: 2rem;
+    margin: 1rem;
+    color: var(--textcolor);
+    font-size: 1.5rem;
+}
+.about-us-container{
+    background-image: url(../images/bg-07.png);
+    width: 90%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+     
+}
+
+.about-us-container h1{
+    color: #2ec8a6;
 }
 
 .choose button:hover {
