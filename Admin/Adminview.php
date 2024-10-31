@@ -1,6 +1,7 @@
 <?php
 session_start();
-include("../Doctor/DBconnect.php");
+include("C:/xampp/htdocs/Doctor/DBconnect.php");
+
 
 // Fetch total number of doctors
 $doctor_query = "SELECT COUNT(*) AS total_doctors FROM doctors"; // Assuming your doctors table is named 'doctors'
@@ -321,11 +322,55 @@ $doctors_result = mysqli_query($conn, $doctors_query);
 
         </div>
 
-        <!-- Pateints-View-->
-        <div class="main--content" id="patients-view" style="display: none;">
-            <h2>Doctors</h2>
-            <p>Details about doctors.</p>
+        <!-- Patients View -->
+<div class="main--content" id="patients-view" style="display: none;">
+    <div class="table-controls">
+        <div class="search">
+            <input type="text" id="patient-search" placeholder="Search patients...">
+            <button><i class="ri-search-2-line"></i></button>
         </div>
+        <div class="add-patient">
+            <a href="AddPatientPage.php"><button class="add-patient-btn"><i class="ri-add-line add"></i> Add Patient</button></a>
+        </div>
+    </div>
+    <div class="tableoverflow">
+        <table id="patients-table" class="table">
+            <thead>
+                <tr>
+                    <th>Full Name</th>
+                    <th>Contact Number</th>
+                    <th>Email</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while($patient = mysqli_fetch_assoc($patients_result)): ?>
+                <tr>
+                    <td><?php echo $patient['Fullname']; ?></td>
+                    <td><?php echo $patient['Contact_number']; ?></td>
+                    <td><?php echo $patient['Email']; ?></td>
+                    <td class="deleteth">
+                        <div class="deletediv">
+                            <button class="delete-btn" data-id="<?php echo $patient['Patient_id']; ?>" data-type="patient" title="Delete Patient">
+                                <i class="ri-delete-bin-line delete"></i>
+                            </button>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="viewdiv">
+                            <button class="view-btn" onclick='openPatientModal(<?php echo json_encode($patient); ?>)' data-id="<?php echo $patient['Patient_id']; ?>" title="View Patient">
+                                <i class="ri-eye-line view"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+    </div>
+</div>
+
         <!-- Doctors View -->
         <div class="main--content" id="support-view" style="display: none;">
             <h2>Support</h2>
