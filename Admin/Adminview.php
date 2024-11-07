@@ -44,7 +44,7 @@ $today_appointments_result = mysqli_query($conn, $today_appointments_query);
 
 // Fetch all appointments
 $appointmentsall_query = "
-    SELECT a.Appointment_ID, a.Year, a.Month, a.Day, a.TimeSlot, p.Fullname AS patient_name, d.Fullname AS doctor_name 
+    SELECT a.Apointment_ID, a.Year, a.Month, a.Day, a.TimeSlot, p.Fullname AS patient_name, d.Fullname AS doctor_name 
     FROM apointments a 
     JOIN patients p ON a.patient_id = p.Patient_id 
     JOIN doctors d ON a.doctor_id = d.Doctors_id";
@@ -68,7 +68,7 @@ $doctors_result = mysqli_query($conn, $doctors_query);
     <link rel="stylesheet" href="Admin.css" />
 </head>
 
-<body>
+
     <section class="header">
         <div class="logo">
             <i class="ri-menu-line icon icon-0 menu"></i>
@@ -317,67 +317,29 @@ $doctors_result = mysqli_query($conn, $doctors_query);
     </div>
 
     </div>
-           
 
 
         </div>
 
         
-
-        <!-- Patients View -->
+    </div>
+<!-- Pateints-View-->
 <div class="main--content" id="patients-view" style="display: none;">
-    <div class="table-controls">
-        <div class="search">
+           
+            <div class="search">
             <input type="text" id="patient-search" placeholder="Search patients...">
             <button><i class="ri-search-2-line"></i></button>
         </div>
         <div class="add-patient">
-            <a href="AddPatientPage.php"><button class="add-patient-btn"><i class="ri-add-line add"></i> Add Patient</button></a>
+           <a href="AddPatientPage.php"><button class="add-patient-btn"><i class="ri-add-line add "></i> Add Patient</button></a> 
         </div>
-    </div>
-    <div class="tableoverflow">
-        <table id="patients-table" class="table">
-            <thead>
-                <tr>
-                    <th>Full Name</th>
-                    <th>Contact Number</th>
-                    <th>Email</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while($patient = mysqli_fetch_assoc($patients_result)): ?>
-                <tr>
-                    <td><?php echo $patient['Fullname']; ?></td>
-                    <td><?php echo $patient['Contact_number']; ?></td>
-                    <td><?php echo $patient['Email']; ?></td>
-                    <td class="deleteth">
-                        <div class="deletediv">
-                            <button class="delete-btn" data-id="<?php echo $patient['Patient_id']; ?>" data-type="patient" title="Delete Patient">
-                                <i class="ri-delete-bin-line delete"></i>
-                            </button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="viewdiv">
-                            <button class="view-btn" onclick='openPatientModal(<?php echo json_encode($patient); ?>)' data-id="<?php echo $patient['Patient_id']; ?>" title="View Patient">
-                                <i class="ri-eye-line view"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-
-        <!-- Doctors View -->
+        </div>
+      
         <div class="main--content" id="support-view" style="display: none;">
             <h2>Support</h2>
            
-        </div>
+        
+                
     <!-- Modal Structure for Viewing Doctor Information -->
 <div id="doctorModal" class="modal">
     <div class="modal-content">
@@ -434,112 +396,62 @@ $doctors_result = mysqli_query($conn, $doctors_query);
 </div>
 </section>
 
- <!-- Doctors View -->
- <div class="main--content" id="support-view" style="display: none;">
-            <h2>Support</h2>
-           
-        </div>
 
-<!-- Modal Structure for Viewing Patient Information -->
-<div id="patientModal" class="modal">
+    <script src="Admin.js"></script>
+
+
+
+ <!-- Modal Structure for Viewing Doctor Information -->
+ <div id="patientModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Patient's Information</h2>
-        <form id="patientForm" enctype="multipart/form-data">
+        <form   id="patientForm"  enctype="multipart/form-data">
+        <div class="input-groupReg">
+           <label for="upload-pic"> Profile Picture</label>
+           <div class="profile-pic-container">
+                <img id="profilePicture" src="" alt="Patient Image" onclick="document.getElementById('upload-pic').click()" />
+           <input type="file" id="upload-pic" name="profile_picture" accept="image/*" style="display: none;" />
+                     </div>
             <div class="input-groupReg">
-                <label for="upload-pic">Profile Picture</label>
-                <div class="profile-pic-container">
-                    <img id="patientProfilePicture" src="" alt="Patient Image" onclick="document.getElementById('upload-pic').click()" />
-                    <input type="file" id="upload-pic" name="profile_picture" accept="image/*" style="display: none;" />
-                </div>
+            <label for="fullname">Fullname:</label>
+            <input type="text" id="fullname" name="fullname">
+            </div> 
+            <div class="input-groupReg">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age">
             </div>
             <div class="input-groupReg">
-                <label for="fullname">Fullname:</label>
-                <input type="text" id="fullname" name="fullname">
+            <label for="specialization">Email</label>
+            <input type="text" id="specialization" name="specialization">
             </div>
             <div class="input-groupReg">
-                <label for="age">Age:</label>
-                <input type="number" id="age" name="age">
+            <label for="contact_number">Contact Number:</label>
+            <input type="text" id="contact_number" name="contact_number">
             </div>
             <div class="input-groupReg">
-                <label for="gender">Gender:</label>
-                <select id="gender" name="gender">
-                    <option value="Male">Male</option>
-                    <option value="Female">Female</option>
-                    <option value="Other">Other</option>
-                </select>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
             </div>
             <div class="input-groupReg">
-                <label for="contact_number">Contact Number:</label>
-                <input type="text" id="contact_number" name="contact_number">
+            <label for="hire_date">Password</label>
+            <input type="date" id="hire_date" name="hire_date">
+            </div>
+           <div class="input-groupReg">
+            <label for="description">Description:</label>
+            <textarea id="description" name="description"></textarea>
             </div>
             <div class="input-groupReg">
-                <label for="email">Email:</label>
-                <input type="email" id="email" name="email">
-            </div>
-            <div class="input-groupReg">
-                <label for="address">Address:</label>
-                <input type="text" id="address" name="address">
-            </div>
-            <div class="input-groupReg">
-                <label for="dob">Date of Birth:</label>
-                <input type="date" id="dob" name="dob">
-            </div>
-            <div class="input-groupReg">
-                <label for="medical_history">Medical History:</label>
-                <textarea id="medical_history" name="medical_history"></textarea>
-            </div>
-            <div class="input-groupReg">
-                <label for="emergency_contact">Emergency Contact:</label>
-                <input type="text" id="emergency_contact" name="emergency_contact">
-            </div>
-            <div class="input-groupReg">
-                <input type="hidden" id="patient_id" name="patient_id">
-                <button class="btn" type="button" id="savePatientChanges">Save Changes</button>
+            <input type="hidden" id="patient_id" name="patient_id">
+            <button  class= "btn"type="button" id="saveChanges">Save Changes</button>
             </div>
         </form>
     </div>
 </div>
-
- <!-- Doctors View -->
- <div class="main--content" id="support-view" style="display: none;">
-            <h2>Support</h2>
-           
-        </div>
-
+</section>
 
 
     <script src="Admin.js"></script>
-
-    <script>
-    // Add event listeners to menu items
-    const menuLinks = document.querySelectorAll('.menu-link');
-    const views = document.querySelectorAll('.main--content');
-
-    menuLinks.forEach(link => {
-        link.addEventListener('click', function(event) {
-            event.preventDefault();
-            
-            // Hide all views
-            views.forEach(view => {
-                view.style.display = 'none';
-            });
-
-            // Remove active class from all menu links
-            menuLinks.forEach(link => {
-                link.classList.remove('active');
-            });
-
-            // Show the selected view
-            const selectedView = document.getElementById(this.getAttribute('data-view') + '-view');
-            selectedView.style.display = 'block';
-
-            // Add active class to the clicked menu link
-            this.classList.add('active');
-        });
-    });
-</script>
-
 
 </body>
 </html>
