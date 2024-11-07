@@ -1,13 +1,16 @@
-<?php 
-$host="localhost";
-$user="root";
-$db="Electronic_Health_Information_System";
+<?php
+$host = "localhost";
+$user = "root";
 $pass = "";
-$conn=new mysqli($host,$user,$pass,$db);
+$db = "electronic_Health_Information_System";  // Make sure this matches your actual DB name
 
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+// Create a connection
+$conn = new mysqli($host, $user, $pass, $db);
+
+// Check the connection
+if ($conn->connect_error) {
+    die("Connection failed: " . $conn->connect_error);
+} else {
+    echo "Connected successfully"; // You can remove this after confirming the connection
 }
-echo "Connected successfully";
-
 ?>

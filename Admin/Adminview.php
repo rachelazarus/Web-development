@@ -15,7 +15,7 @@ $patient_result = mysqli_query($conn, $patient_query);
 $patient_data = mysqli_fetch_assoc($patient_result);
 $total_patients = $patient_data['total_patients'];
 
-$Appointments_query = "SELECT COUNT(*) AS total_appointments FROM appointments"; // Assuming your patients table is named 'patients'
+$Appointments_query = "SELECT COUNT(*) AS total_appointments FROM apointments"; // Assuming your patients table is named 'patients'
 $appointment_result = mysqli_query($conn, $Appointments_query);
 $appointment_data = mysqli_fetch_assoc($appointment_result);
 $total_appointments = $appointment_data['total_appointments'];
@@ -32,7 +32,7 @@ $data = json_decode(file_get_contents("php://input"));
 // Query to fetch today's appointments
 $today_appointments_query = "
     SELECT p.Fullname AS patient_name, d.Fullname AS doctor_name, a.TimeSlot 
-    FROM appointments a 
+    FROM apointments a 
     JOIN patients p ON a.patient_id = p.Patient_id 
     JOIN doctors d ON a.doctor_id = d.Doctors_id 
     WHERE a.Year = '$today_year' AND a.Month = '$today_month' AND a.Day = '$today_day'
@@ -45,7 +45,7 @@ $today_appointments_result = mysqli_query($conn, $today_appointments_query);
 // Fetch all appointments
 $appointmentsall_query = "
     SELECT a.Appointment_ID, a.Year, a.Month, a.Day, a.TimeSlot, p.Fullname AS patient_name, d.Fullname AS doctor_name 
-    FROM appointments a 
+    FROM apointments a 
     JOIN patients p ON a.patient_id = p.Patient_id 
     JOIN doctors d ON a.doctor_id = d.Doctors_id";
 $appointments_result = mysqli_query($conn, $appointmentsall_query);
@@ -322,6 +322,8 @@ $doctors_result = mysqli_query($conn, $doctors_query);
 
         </div>
 
+        
+
         <!-- Patients View -->
 <div class="main--content" id="patients-view" style="display: none;">
     <div class="table-controls">
@@ -432,8 +434,112 @@ $doctors_result = mysqli_query($conn, $doctors_query);
 </div>
 </section>
 
+ <!-- Doctors View -->
+ <div class="main--content" id="support-view" style="display: none;">
+            <h2>Support</h2>
+           
+        </div>
+
+<!-- Modal Structure for Viewing Patient Information -->
+<div id="patientModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Patient's Information</h2>
+        <form id="patientForm" enctype="multipart/form-data">
+            <div class="input-groupReg">
+                <label for="upload-pic">Profile Picture</label>
+                <div class="profile-pic-container">
+                    <img id="patientProfilePicture" src="" alt="Patient Image" onclick="document.getElementById('upload-pic').click()" />
+                    <input type="file" id="upload-pic" name="profile_picture" accept="image/*" style="display: none;" />
+                </div>
+            </div>
+            <div class="input-groupReg">
+                <label for="fullname">Fullname:</label>
+                <input type="text" id="fullname" name="fullname">
+            </div>
+            <div class="input-groupReg">
+                <label for="age">Age:</label>
+                <input type="number" id="age" name="age">
+            </div>
+            <div class="input-groupReg">
+                <label for="gender">Gender:</label>
+                <select id="gender" name="gender">
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+            <div class="input-groupReg">
+                <label for="contact_number">Contact Number:</label>
+                <input type="text" id="contact_number" name="contact_number">
+            </div>
+            <div class="input-groupReg">
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email">
+            </div>
+            <div class="input-groupReg">
+                <label for="address">Address:</label>
+                <input type="text" id="address" name="address">
+            </div>
+            <div class="input-groupReg">
+                <label for="dob">Date of Birth:</label>
+                <input type="date" id="dob" name="dob">
+            </div>
+            <div class="input-groupReg">
+                <label for="medical_history">Medical History:</label>
+                <textarea id="medical_history" name="medical_history"></textarea>
+            </div>
+            <div class="input-groupReg">
+                <label for="emergency_contact">Emergency Contact:</label>
+                <input type="text" id="emergency_contact" name="emergency_contact">
+            </div>
+            <div class="input-groupReg">
+                <input type="hidden" id="patient_id" name="patient_id">
+                <button class="btn" type="button" id="savePatientChanges">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+ <!-- Doctors View -->
+ <div class="main--content" id="support-view" style="display: none;">
+            <h2>Support</h2>
+           
+        </div>
+
+
 
     <script src="Admin.js"></script>
+
+    <script>
+    // Add event listeners to menu items
+    const menuLinks = document.querySelectorAll('.menu-link');
+    const views = document.querySelectorAll('.main--content');
+
+    menuLinks.forEach(link => {
+        link.addEventListener('click', function(event) {
+            event.preventDefault();
+            
+            // Hide all views
+            views.forEach(view => {
+                view.style.display = 'none';
+            });
+
+            // Remove active class from all menu links
+            menuLinks.forEach(link => {
+                link.classList.remove('active');
+            });
+
+            // Show the selected view
+            const selectedView = document.getElementById(this.getAttribute('data-view') + '-view');
+            selectedView.style.display = 'block';
+
+            // Add active class to the clicked menu link
+            this.classList.add('active');
+        });
+    });
+</script>
+
 
 </body>
 </html>
