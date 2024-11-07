@@ -17,7 +17,7 @@
             <ul class="nav-links">
                 <li><a href="../login/Patient.php">Home</a></li>
                 <li><a href="#About">About</a></li>
-                <li><a href="#Contact">Contact</a></li>
+                <li><a href="#Conta ct">Contact</a></li>
             </ul>
         </nav>
         <div class="back">
@@ -30,7 +30,7 @@
     <main>
         <h1 class="topic">MAKE AN APPOINTMENT</h1>
 
-        <form action="./process-form.php" method="POST">
+        <form action="../patientView/database connection/process-form.php" method="POST">
             <!-- Full Name -->
             <div class="form-group">
                 <label for="fullname">Full Name:</label>
@@ -88,7 +88,7 @@
             <div class="form-group">
                 <button type="submit"  name="submit" >Make Appointment</button>
             </div>
-            <button type="button" class="back-button" onclick="history.back()">Back</button>
+            <button type="button" class="back-button" onclick="window.location.href='./Patientview.php'">Back</button>
         </form>
 
     </main>

@@ -10,6 +10,7 @@
   <title>Patient View</title>
 </head>
 
+
 <body>
   <header>
     <div class="logo">
@@ -40,7 +41,7 @@
           <p><img src="../favicon/telephone (1).png" alt="Phone Icon"> Phone Number: </p>
         </div>
         <div class="choose">
-          <button type="submit" class="getRecord">Get Records</button>
+          <button type="submit" class="getRecord" onclick="window.location.href='./getRecords.php'">Get Records</button>
           <button type="submit" class="Appointment" onclick="window.location.href='./appointment.php'">Make Appointment</button>
         </div>
       </div>

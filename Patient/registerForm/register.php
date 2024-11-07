@@ -11,11 +11,10 @@
 </head>
 
 <body>
-
-
     <div class="container">
         <?php
         if (isset($_POST["submit"])) {
+            // Gather form data
             $fullname = $_POST["Fullname"];
             $dateOfBirth = $_POST["dateOfBirth"];
             $email = $_POST["email"];
@@ -23,92 +22,139 @@
             $password = $_POST["password"];
             $confpassword = $_POST["confpassword"];
 
+            // Hash password for security
             $password_hash = password_hash($password, PASSWORD_DEFAULT);
-            $error = array();
+            $errors = [];
+
+            // File upload settings
+            $file_name = $_FILES['profilePicture']['name'];
+            $tempname = $_FILES['profilePicture']['tmp_name']; // Corrected to directly access tmp_name
+            $folder = '../patientProfilepictures/' . $file_name;
+            
 
             // Validation checks
-            if (empty($fullname) || empty($dateOfBirth) || empty($contact) || empty($password) || empty($confpassword)) {
-                array_push($error, "All fields are required");
+            if (empty($file_name) || empty($fullname) || empty($dateOfBirth) || empty($contact) || empty($password) || empty($confpassword)) {
+                $errors[] = "All fields are required.";
             }
             if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-                array_push($error, "Email is not valid");
+                $errors[] = "Email is not valid.";
             }
             if (strlen($password) < 8) {
-                array_push($error, "Password must be at least 8 characters long");
+                $errors[] = "Password must be at least 8 characters long.";
             }
             if ($password !== $confpassword) {
-                array_push($error, "Passwords do not match");
+                $errors[] = "Passwords do not match.";
             }
 
             require_once("./database.php");
-            $sql = "SELECT * FROM patients WHERE email = '$email'";
-           $result = mysqli_query($conn,$sql);
-            
-           $rawCount = mysqli_num_rows($result);
 
-           if($rawCount){
-            array_push($error, "Email already exist");
-           }
+            // Prepare the SQL statement
+$sql = "SELECT * FROM patients WHERE Contact_number = ?";
+$stmt = $conn->prepare($sql);
 
-            // Validate date of birth (should not be in the future)
+// Check if the statement prepared correctly
+if ($stmt === false) {
+    die("MySQL prepare statement error: " . $conn->error); // Display error if the prepare statement failed
+}
+
+$stmt->bind_param("s", $contact); // Bind the contact number as a string parameter
+
+// Execute the statement
+$stmt->execute();
+$result = $stmt->get_result(); // Get the result set
+
+// Check if any rows were returned, indicating the contact exists
+if ($result->num_rows > 0) {
+    $errors[] = "Contact already exists.";
+}
+
+// Check for existing email
+$sql = "SELECT * FROM patients WHERE email = ?";
+$stmt = $conn->prepare($sql);
+$stmt->bind_param("s", $email);
+$stmt->execute();
+$result = $stmt->get_result();
+if ($result->num_rows > 0) {
+    $errors[] = "Email already exists.";
+}
+$stmt->close();
+
+            // Validate date of birth
             if ($dateOfBirth > date("Y")) {
-                array_push($error, "Invalid date of birth");
+                $errors[] = "Invalid date of birth.";
             }
 
             // Display errors
-            if (count($error) > 0) {
-                foreach ($error as $err) {
-                    echo "<div class='alert alert-danger'>$err</div>";
+            if (count($errors) > 0) {
+                foreach ($errors as $error) {
+                    echo "<div class='alert alert-danger'>$error</div>";
                 }
             } else {
-               
-
-                // Call the function to insert data
-                if (insertPatient($fullname, $dateOfBirth, $email, $contact,$password_hash)) {
-                    echo "<div class='alert alert-success'>Registration successful!</div>";
+                // Move the uploaded file to the target directory
+                if (move_uploaded_file($tempname, $folder)) {
+                    // Prepare the SQL statement
+                    $stmt = $conn->prepare("INSERT INTO patients (Profile_picture_path, Fullname, dateOfBirth, email, Contact_number, EncryptedPassword) VALUES (?, ?, ?, ?, ?, ?)");
+                    
+                    // Check if prepare() succeeded
+                    if ($stmt === false) {
+                        die("Prepare failed: " . $conn->error);
+                    }
+            
+                    // Bind parameters and execute the statement
+                    $stmt->bind_param("ssssss", $folder, $fullname, $dateOfBirth, $email, $contact, $password_hash);
+            
+                    if ($stmt->execute()) {
+                        echo "<div class='alert alert-success'>Registration successful!</div>";
+                    } else {
+                        echo "<div class='alert alert-danger'>Registration failed: " . $stmt->error . "</div>";
+                    }
+                    
+                    // Close the statement
+                    $stmt->close();
                 } else {
-                    echo "<div class='alert alert-danger'>Registration failed!</div>";
+                    echo "<div class='alert alert-danger'>Failed to upload profile picture.</div>";
                 }
             }
-        }
+                
+            }
+        
         ?>
 
-        <form action="./register.php" method="post">
+        <!-- Form HTML with enctype for file upload -->
+        <form action="./register.php" method="post" enctype="multipart/form-data">
+            <div class="input-groupReg">
+                <label for="profilePicture">Profile Picture</label>
+                <input type="file" name="profilePicture" id="profilePicture" required />
+            </div>
             <div class="form-group">
                 <label for="fullname">Full Name</label>
                 <input type="text" class="form-control" name="Fullname" id="fullname" placeholder="Full Name" required>
             </div>
-
             <div class="form-group">
                 <label for="dateOfBirth">Date of Birth (Year)</label>
                 <input type="number" class="form-control" name="dateOfBirth" id="dateOfBirth" placeholder="Enter birth year" min="1900" max="<?php echo date('Y'); ?>" required>
             </div>
-
             <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" name="email" id="email" placeholder="example@gmail.com" required>
             </div>
-
             <div class="form-group">
                 <label for="contact">Contact</label>
                 <input type="text" class="form-control" name="contact" id="contact" placeholder="123-456-7890" required>
             </div>
-
             <div class="form-group">
                 <label for="password">Password</label>
                 <input type="password" class="form-control" name="password" id="password" placeholder="*****">
             </div>
-
             <div class="form-group">
                 <label for="confpassword">Confirm Password</label>
                 <input type="password" class="form-control" name="confpassword" id="confpassword" placeholder="*****">
             </div>
-
             <div class="form-btn">
                 <input type="submit" class="btn btn-primary" value="Register" name="submit">
+            </div>
             <div class="form-btn">
-            <a href="../login/Patient.php" id="btn" class="btn btn-primary">Back</a>
-
+                <a href="../login/Patient.php" id="btn" class="btn btn-primary">Back</a>
             </div>
         </form>
     </div>
