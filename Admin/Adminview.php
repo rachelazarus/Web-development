@@ -337,6 +337,54 @@ $doctors_result = mysqli_query($conn, $doctors_query);
       
         <div class="main--content" id="support-view" style="display: none;">
             <h2>Support</h2>
+
+            <div class="tableoverflow">
+        <table id="patients-table" class="table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Contact</th>
+                
+                <th></th>
+                <th></th>
+               
+            </tr>
+        </thead>
+        <tbody>
+            <?php while($patient = mysqli_fetch_assoc($patient_result)): ?>
+            <tr>
+
+                <td><?php echo $patient['Fullname']; ?></td>
+                <td><?php echo $patient['Email']; ?></td>
+                <td><?php echo $patient['Contact_number']; ?></td>
+                
+                <td class="deleteth">
+                  
+                     <div class="deletediv">
+                     <button class="view-btn" onclick='openPatientModal(<?php echo json_encode($patient); ?>)'  data-id="<?php echo $patient['Patients_id']; ?>" title="View Patient">
+                            <i class="ri-delete-bin-line delete"></i>
+                          </button>
+                    
+                </td>
+                <td >
+                </div >
+                    <div class = "viewdiv">
+                        <i class="ri-eye-line view"></i>
+                    </button>
+                     </div>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+    </div>
+
+    </div>
+
+
+        </div>
+        </div>
            
         
                 
@@ -401,8 +449,8 @@ $doctors_result = mysqli_query($conn, $doctors_query);
 
 
 
- <!-- Modal Structure for Viewing Doctor Information -->
- <div id="patientModal" class="modal">
+ <!-- Modal Structure for Viewing Patient Information -->
+ <div id="PatientModal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Patient's Information</h2>
@@ -417,14 +465,8 @@ $doctors_result = mysqli_query($conn, $doctors_query);
             <label for="fullname">Fullname:</label>
             <input type="text" id="fullname" name="fullname">
             </div> 
-            <div class="input-groupReg">
-            <label for="age">Age:</label>
-            <input type="number" id="age" name="age">
-            </div>
-            <div class="input-groupReg">
-            <label for="specialization">Email</label>
-            <input type="text" id="specialization" name="specialization">
-            </div>
+           
+        
             <div class="input-groupReg">
             <label for="contact_number">Contact Number:</label>
             <input type="text" id="contact_number" name="contact_number">
@@ -437,10 +479,7 @@ $doctors_result = mysqli_query($conn, $doctors_query);
             <label for="hire_date">Password</label>
             <input type="date" id="hire_date" name="hire_date">
             </div>
-           <div class="input-groupReg">
-            <label for="description">Description:</label>
-            <textarea id="description" name="description"></textarea>
-            </div>
+          
             <div class="input-groupReg">
             <input type="hidden" id="patient_id" name="patient_id">
             <button  class= "btn"type="button" id="saveChanges">Save Changes</button>
