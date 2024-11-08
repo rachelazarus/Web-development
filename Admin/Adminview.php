@@ -15,7 +15,7 @@ $patient_result = mysqli_query($conn, $patient_query);
 $patient_data = mysqli_fetch_assoc($patient_result);
 $total_patients = $patient_data['total_patients'];
 
-$Appointments_query = "SELECT COUNT(*) AS total_appointments FROM apointments"; // Assuming your patients table is named 'patients'
+$Appointments_query = "SELECT COUNT(*) AS total_appointments FROM appointments"; // Assuming your patients table is named 'patients'
 $appointment_result = mysqli_query($conn, $Appointments_query);
 $appointment_data = mysqli_fetch_assoc($appointment_result);
 $total_appointments = $appointment_data['total_appointments'];
@@ -32,7 +32,7 @@ $data = json_decode(file_get_contents("php://input"));
 // Query to fetch today's appointments
 $today_appointments_query = "
     SELECT p.Fullname AS patient_name, d.Fullname AS doctor_name, a.TimeSlot 
-    FROM apointments a 
+    FROM appointments a 
     JOIN patients p ON a.patient_id = p.Patient_id 
     JOIN doctors d ON a.doctor_id = d.Doctors_id 
     WHERE a.Year = '$today_year' AND a.Month = '$today_month' AND a.Day = '$today_day'
@@ -44,8 +44,8 @@ $today_appointments_result = mysqli_query($conn, $today_appointments_query);
 
 // Fetch all appointments
 $appointmentsall_query = "
-    SELECT a.Apointment_ID, a.Year, a.Month, a.Day, a.TimeSlot, p.Fullname AS patient_name, d.Fullname AS doctor_name 
-    FROM apointments a 
+    SELECT a.Appointment_ID, a.Year, a.Month, a.Day, a.TimeSlot, p.Fullname AS patient_name, d.Fullname AS doctor_name 
+    FROM appointments a 
     JOIN patients p ON a.patient_id = p.Patient_id 
     JOIN doctors d ON a.doctor_id = d.Doctors_id";
 $appointments_result = mysqli_query($conn, $appointmentsall_query);
@@ -325,32 +325,30 @@ $doctors_result = mysqli_query($conn, $doctors_query);
     </div>
 <!-- Pateints-View-->
 <div class="main--content" id="patients-view" style="display: none;">
-           
-            <div class="search">
-            <input type="text" id="patient-search" placeholder="Search patients...">
-            <button><i class="ri-search-2-line"></i></button>
-        </div>
-        <div class="add-patient">
-           <a href="AddPatientPage.php"><button class="add-patient-btn"><i class="ri-add-line add "></i> Add Patient</button></a> 
-        </div>
-        </div>
-      
-        <div class="main--content" id="support-view" style="display: none;">
-            <h2>Support</h2>
-
-            <div class="tableoverflow">
-        <table id="patients-table" class="table">
+    <div class="search">
+        <input type="text" id="patient-search" placeholder="Search patients...">
+        <button><i class="ri-search-2-line"></i></button>
+    </div>
+    <div class="add-patient">
+        <a href="AddPatientPage.php"><button class="add-patient-btn"><i class="ri-add-line add"></i> Add Patient</button></a>
+    </div>
+    
+    <!-- Start of the table -->
+    <table>
         <thead>
             <tr>
                 <th>Name</th>
-                <th>Email</th>
+                <th>Age</th>
                 <th>Contact</th>
-                
+                <th>Email</th>
                 <th></th>
-                <th></th>
-               
             </tr>
         </thead>
+        <tbody>
+            <!-- Table rows with patient data will go here -->
+        </tbody>
+    </table>
+</div>
         <tbody>
             <?php while($patient = mysqli_fetch_assoc($patient_result)): ?>
             <tr>
