@@ -13,9 +13,9 @@
     <nav>
         <ul>
             <div class="left-links">
-                <li><a href="..\Homepage\DoctorHomepage.html">Home</a></li>
+                <li><a href="..\Homepage\DoctorHomepage.php">Home</a></li>
                 <li><a href="#">Record</a></li>
-                <li><a href="..\Appointment\appointment.html">Appointment</a></li>
+                <li><a href="..\Appointment\appointment.php">Appointment</a></li>
             </div>
         </ul>
     </nav>

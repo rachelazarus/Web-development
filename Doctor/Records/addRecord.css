@@ -1,25 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Poppins', sans-serif
+    font-family: 'Poppins', sans-serif;
 }
 
-body{
+body {
     background-color: #f0f0f0;   
 }
 
-
-
-header{
+header {
     display: flex;
     background-color: #00A5B7;
     padding: 20px;
     justify-content: center;
-   
 }
 
 .nav-links {
@@ -29,8 +25,7 @@ header{
     gap: 1.5rem;
 }
 
-nav ul{
-    
+nav ul {
     list-style: none;
     display: flex;
     gap: 1.5rem;
@@ -40,10 +35,9 @@ nav ul li {
     margin: 0 10px;
 }
 
-nav ul li a{
+nav ul li a {
     color: white;
     text-decoration: none;
-    font-size: 16px;
     font-size: 16px;
     padding: 10px 20px;
     border-radius: 20px;
@@ -58,16 +52,21 @@ nav ul li a:hover {
 
 .container {
     display: flex;
-    width: 900px;
+    flex-direction: column; /* Change to column to stack elements vertically */
+    width: 100%; /* Changed to 100% to utilize full width */
+    max-width: 900px; /* Set max-width to maintain overall layout */
     background-color: #9BB5CC;
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-    margin: 100px;
-    margin-top: 50px;
-    margin-left: 250px;
-    justify-content: center;
-  
+    margin: 50px auto; /* Centering the container */
+    padding: 20px; /* Add padding for better layout */
+}
+
+/* Combined Form */
+.combined-form {
+    display: flex;
+    width: 100%; /* Ensures the form takes full width of container */
 }
 
 /* Left Section */
@@ -89,22 +88,27 @@ nav ul li a:hover {
     border-radius: 10px;
     border: 1px solid #ccc;
     background-color: #e0e0e0;
- 
 }
 
+/* Submit Button */
 .submit-btn {
-    padding: 15px;
-    background-color: #3e9c5d;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    margin-top: 20px;
-    font-weight: bold;
-    cursor: pointer;
+    align-self: flex-end; /* Aligns the button to the right */
+    padding: 10px 20px; /* Adjusts padding for better sizing */
+    background-color: #3e9c5d; /* Button color */
+    color: white; /* Text color */
+    border: none; /* Removes default border */
+    border-radius: 20px; /* More rounded corners */
+    margin-top: 20px; /* Space above the button */
+    font-weight: bold; /* Bold text */
+    cursor: pointer; /* Pointer cursor on hover */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition for hover effects */
+    font-size: 14px; /* Font size */
 }
 
+/* Hover effect */
 .submit-btn:hover {
-    background-color: #3b4f56;
+    background-color: #3b4f56; /* Darker background on hover */
+    transform: scale(1.05); /* Slightly enlarge the button on hover */
 }
 
 /* Right Section */

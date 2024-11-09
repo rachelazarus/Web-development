@@ -9,8 +9,16 @@
     margin-bottom: 30px;
     text-align: left;
 }
+#profilePicture{
+    flex: 2;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    box-sizing: border-box;
+    margin: 1rem;
+}
 
 .btn{
     align-items: center;
     margin: 1rem;
-}
+} 

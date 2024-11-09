@@ -4,10 +4,7 @@ $user="root";
 $db="Electronic_Health_Information_System";
 $pass = "";
 $conn=new mysqli($host,$user,$pass,$db);
-
-if (!$conn) {
-    die("Connection failed: " . mysqli_connect_error());
+if($conn->connect_error){
+    echo "failed to connect DB".conn->connect_err;
 }
-echo "Connected successfully";
-
 ?>

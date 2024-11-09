@@ -12,7 +12,7 @@
         <ul>
             <li>
                 <li><a href="..\Homepage\DoctorHomepage.php">Home</a></li>
-                <li><a href="..\Records\SearchPage.html">Record</a></li>
+                <li><a href="..\Records\SearchPage.php">Record</a></li>
                 <li><a href="#">Appointment</a></li>
             </li>
         </ul>

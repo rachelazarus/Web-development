@@ -68,7 +68,7 @@ $doctors_result = mysqli_query($conn, $doctors_query);
     <link rel="stylesheet" href="Admin.css" />
 </head>
 
-<body>
+
     <section class="header">
         <div class="logo">
             <i class="ri-menu-line icon icon-0 menu"></i>
@@ -317,65 +317,75 @@ $doctors_result = mysqli_query($conn, $doctors_query);
     </div>
 
     </div>
-           
 
 
         </div>
 
-        <!-- Patients View -->
+        
+    </div>
+<!-- Pateints-View-->
 <div class="main--content" id="patients-view" style="display: none;">
-    <div class="table-controls">
-        <div class="search">
-            <input type="text" id="patient-search" placeholder="Search patients...">
-            <button><i class="ri-search-2-line"></i></button>
-        </div>
-        <div class="add-patient">
-            <a href="AddPatientPage.php"><button class="add-patient-btn"><i class="ri-add-line add"></i> Add Patient</button></a>
-        </div>
+    <div class="search">
+        <input type="text" id="patient-search" placeholder="Search patients...">
+        <button><i class="ri-search-2-line"></i></button>
     </div>
-    <div class="tableoverflow">
-        <table id="patients-table" class="table">
-            <thead>
-                <tr>
-                    <th>Full Name</th>
-                    <th>Contact Number</th>
-                    <th>Email</th>
-                    <th></th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while($patient = mysqli_fetch_assoc($patients_result)): ?>
-                <tr>
-                    <td><?php echo $patient['Fullname']; ?></td>
-                    <td><?php echo $patient['Contact_number']; ?></td>
-                    <td><?php echo $patient['Email']; ?></td>
-                    <td class="deleteth">
-                        <div class="deletediv">
-                            <button class="delete-btn" data-id="<?php echo $patient['Patient_id']; ?>" data-type="patient" title="Delete Patient">
-                                <i class="ri-delete-bin-line delete"></i>
-                            </button>
-                        </div>
-                    </td>
-                    <td>
-                        <div class="viewdiv">
-                            <button class="view-btn" onclick='openPatientModal(<?php echo json_encode($patient); ?>)' data-id="<?php echo $patient['Patient_id']; ?>" title="View Patient">
-                                <i class="ri-eye-line view"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+    <div class="add-patient">
+        <a href="AddPatientPage.php"><button class="add-patient-btn"><i class="ri-add-line add"></i> Add Patient</button></a>
     </div>
+    
+    <!-- Start of the table -->
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Table rows with patient data will go here -->
+        </tbody>
+    </table>
 </div>
+        <tbody>
+            <?php while($patient = mysqli_fetch_assoc($patient_result)): ?>
+            <tr>
 
-        <!-- Doctors View -->
-        <div class="main--content" id="support-view" style="display: none;">
-            <h2>Support</h2>
-           
+                <td><?php echo $patient['Fullname']; ?></td>
+                <td><?php echo $patient['Email']; ?></td>
+                <td><?php echo $patient['Contact_number']; ?></td>
+                
+                <td class="deleteth">
+                  
+                     <div class="deletediv">
+                     <button class="view-btn" onclick='openPatientModal(<?php echo json_encode($patient); ?>)'  data-id="<?php echo $patient['Patients_id']; ?>" title="View Patient">
+                            <i class="ri-delete-bin-line delete"></i>
+                          </button>
+                    
+                </td>
+                <td >
+                </div >
+                    <div class = "viewdiv">
+                        <i class="ri-eye-line view"></i>
+                    </button>
+                     </div>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+    </div>
+
+    </div>
+
+
         </div>
+        </div>
+           
+        
+                
     <!-- Modal Structure for Viewing Doctor Information -->
 <div id="doctorModal" class="modal">
     <div class="modal-content">
@@ -425,6 +435,51 @@ $doctors_result = mysqli_query($conn, $doctors_query);
             </div>
             <div class="input-groupReg">
             <input type="hidden" id="doctor_id" name="doctor_id">
+            <button  class= "btn"type="button" id="saveChanges">Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>
+</section>
+
+
+    <script src="Admin.js"></script>
+
+
+
+ <!-- Modal Structure for Viewing Patient Information -->
+ <div id="PatientModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <h2>Patient's Information</h2>
+        <form   id="patientForm"  enctype="multipart/form-data">
+        <div class="input-groupReg">
+           <label for="upload-pic"> Profile Picture</label>
+           <div class="profile-pic-container">
+                <img id="profilePicture" src="" alt="Patient Image" onclick="document.getElementById('upload-pic').click()" />
+           <input type="file" id="upload-pic" name="profile_picture" accept="image/*" style="display: none;" />
+                     </div>
+            <div class="input-groupReg">
+            <label for="fullname">Fullname:</label>
+            <input type="text" id="fullname" name="fullname">
+            </div> 
+           
+        
+            <div class="input-groupReg">
+            <label for="contact_number">Contact Number:</label>
+            <input type="text" id="contact_number" name="contact_number">
+            </div>
+            <div class="input-groupReg">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email">
+            </div>
+            <div class="input-groupReg">
+            <label for="hire_date">Password</label>
+            <input type="date" id="hire_date" name="hire_date">
+            </div>
+          
+            <div class="input-groupReg">
+            <input type="hidden" id="patient_id" name="patient_id">
             <button  class= "btn"type="button" id="saveChanges">Save Changes</button>
             </div>
         </form>

@@ -60,29 +60,40 @@
         <h1>Login</h1>
         <br>
         <?php
-if(isset($_POST['login'])){
-    $email = $_POST["Email"];  // Changed to match form field names
+session_start(); // Start the session to store user data
+
+if (isset($_POST['login'])) {
+    $email = $_POST["Email"];
     $password = $_POST["password"];
 
-    // Changed to match form field names
-
-    require_once "../registerForm/database.php";  // Ensure the correct path to the file
+    require_once "../registerForm/database.php";
     $sql = "SELECT * FROM patients WHERE Email = '$email'";
     $result = mysqli_query($conn, $sql);
-    $patient = mysqli_fetch_assoc($result);  // Fetch a single row
+    $patient = mysqli_fetch_assoc($result);
 
-    if($patient){
-        if(password_verify($password, $patient["EncryptedPassword"])){
-            header("Location:../patientView/Patientview.php");
-            die(); 
+    if ($patient) {
+        if (password_verify($password, $patient["EncryptedPassword"])) {
+            // Store user details in session variables
+            $_SESSION['Patient_id'] = $patient['Patient_id']; // Assuming 'id' is the user's unique identifier
+            $_SESSION['email'] = $patient['Email'];
+            $_SESSION['Fullname'] = $patient['Fullname'];
+            $_SESSION['Contact_number'] = $patient['Contact_number'];
+           // Store the profile picture path in the session
+           $_SESSION['Profile_picture_path'] = $patient['Profile_picture_path'];
+
+            
+            // Redirect to profile view page
+            header("Location: ../patientView/Patientview.php");
+            exit();
         } else {
-            echo "<div class='alert-danger'>Password does not match</div>";
+            echo "<div class='alert-danger'>Password does not exist</div>";
         }
     } else {
-        echo "<div class='alert-danger'>Email does not match</div>";
+        echo "<div class='alert-danger'>Email does not exist</div>";
     }
 }
 ?>
+
         <div class="input-group">
           <form action="./Patient.php" method="post">
             <label for="email">Email</label>
