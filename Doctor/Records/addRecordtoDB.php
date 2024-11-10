@@ -1,25 +1,27 @@
 <?php
-
 include '../DBconnect.php';
 
-$weight = $_POST['weight'];
-$age = $_POST['age'];
-$date = $_POST['date'];
-$sickness_description = $_POST['sickness_description'];
-$diagnosis = $_POST['diagnosis'];
-$prescription = $_POST['prescription'];
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $patient_id = $_POST['patient_id'];
+    $doctor_id = $_POST['doctor_id'];
+    $temperature = $_POST['temperature'];
+    $weight = $_POST['weight'];
+    $sickness_description = $_POST['sickness_description'];
+    $diagnosis = $_POST['diagnosis'];
+    $prescription = $_POST['prescription'];
 
-$stmt = $conn->prepare("INSERT INTO patient_records_entries (weight, age, date, sickness_description, diagnosis, prescription) VALUES (?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("iissss", $weight, $age, $date, $sickness_description, $diagnosis, $prescription); // Adjust types as needed
+    $sql = "INSERT INTO patient_record_entries 
+            (Temperature, Weight, Sickness_description, Diagnoses, Prescriptions, Patient_id, Doctors_id)
+            VALUES ('$temperature', '$weight', '$sickness_description', '$diagnosis', '$prescription', '$patient_id', '$doctor_id')";
 
-// Execute the statement
-if ($stmt->execute()) {
-    echo "Record added successfully!";
-} else {
-    echo "Error: " . $stmt->error;
+
+echo"<script>alert('Record added successfully'); window.history.back();</script>";
+    if (mysqli_query($conn, $sql)) {
+        
+    } else {
+        echo "Error: " . $sql . "<br>" . mysqli_error($conn);
+    }
+    mysqli_close($conn);
+    header("Location: viewRecord.php?patient_id=$patient_id");
 }
-
-// Close the connections
-$stmt->close();
-$conn->close();
 ?>

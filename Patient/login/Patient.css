@@ -1,7 +1,7 @@
 :root {
-    --maincolor: #2ec8a6;
-    --secondcolor: #f8a803;
-    --thirdcolor: #f4ab01;
+    --maincolor: #2ea7c8;
+    --secondcolor: #4d74b8;
+    --thirdcolor: #01a7f4;
     --textcolor: #4a5764;
 }
 
@@ -13,7 +13,10 @@
     border: none;
     text-decoration: none;
     transition: all 200ms linear;
+    font-family: 'Poppins', sans-serif
+    ;
 }
+
 
 html {
     font-size: 1rem;
@@ -44,7 +47,9 @@ nav, .nav-links {
     display: flex;
     gap: 2rem;
     list-style: none;
-    font-size: 1.7rem;
+    font-size: 20px;
+    font-weight: bold;
+    
 }
 
 a {
@@ -119,7 +124,7 @@ a:hover::after {
 
 .login-container {
     padding: 2.5rem; /* Adjust padding to prevent excess space */
-    border-radius: 5px;
+    border-radius: 30px;
     box-shadow: 0px 4px 20px rgba(0, 0, 0, 1);
     background-color: rgba(255, 255, 255, 0.9); /* Slightly transparent background */
     width: 350px; /* Increase width for a larger container */
@@ -137,7 +142,7 @@ a:hover::after {
 .input-group, h1{
     
     color: var(--maincolor);
-    font-size: large;
+    
 }
 
 .input-group input{
@@ -156,7 +161,7 @@ background-color: var(--maincolor);
     padding: 0.8rem;
     margin: 1rem;
     background-color: var(--secondcolor);
-    color: var(--textcolor);
+    color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
@@ -164,7 +169,7 @@ background-color: var(--maincolor);
 }
 
 .login-btn:hover {
-    background-color: #25a489;
+    background-color: #2567a4;
 }
 
 .alert-danger{

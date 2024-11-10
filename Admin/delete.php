@@ -10,6 +10,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $delete_query = "DELETE FROM apointments WHERE Apointment_ID = ?";
     } elseif ($item_type === 'doctor') {
         $delete_query = "DELETE FROM doctors WHERE Doctors_id = ?";
+    } elseif($item_type === 'patient')    {
+        $delete_query = "DELETE FROM doctors WHERE Doctors_id = ?";
     } else {
         echo "Invalid item type";
         exit;

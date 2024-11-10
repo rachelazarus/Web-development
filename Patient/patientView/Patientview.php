@@ -10,6 +10,7 @@ $Fullname = $_SESSION['Fullname'];
 $Profile_picture_path = $_SESSION['Profile_picture_path'];
 $email = $_SESSION['email'];
 $contactNumber = $_SESSION['Contact_number'];
+$patient = $_SESSION["Patient_id"]
 ?>
 
 <!DOCTYPE html>
@@ -18,8 +19,8 @@ $contactNumber = $_SESSION['Contact_number'];
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://kit.fontawesome.com/c1df782baf.js"></script>
-    <link rel="icon" href="../favicon/medical-check.png" type="image/x-icon">
-    <link rel="stylesheet" href="./style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
     <title>Patient View</title>
 </head>
 <body>
@@ -49,12 +50,12 @@ $contactNumber = $_SESSION['Contact_number'];
             </div>
 
             <div>
-                <div class="contact-container">
-                    <p><img src="../favicon/email.png" alt="Email Icon"> Email: <?php echo htmlspecialchars($email); ?></p>
-                    <p><img src="../favicon/telephone (1).png" alt="Phone Icon"> Phone Number: <?php echo htmlspecialchars($contactNumber); ?></p>
-                </div>
+            <div class="contact-container">
+    <p><i class="ri-mail-line"></i> Email: <?php echo htmlspecialchars($email); ?></p>
+    <p><i class="ri-phone-line"></i> Phone Number: <?php echo htmlspecialchars($contactNumber); ?></p>
+</div>
                 <div class="choose">
-                    <button type="submit" class="getRecord" onclick="window.location.href='./getRecords.php'">Get Records</button>
+                    <button type="submit" class="getRecord" onclick="window.location.href='./appointment.php'">Get Records</button>
                     
                     <button type="submit" class="Appointment" onclick="window.location.href='./appointment.php'">Make Appointment</button>
                     

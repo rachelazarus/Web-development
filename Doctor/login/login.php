@@ -9,18 +9,7 @@
     
 </head>
 <body>
-    <header>
-    <nav class="navbar">
-            <div class="logo">LOGO</div>
-            <ul>
-                <li><a href="../../Main menu.html">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Service</a></li>
-            </ul>
-
-        </nav>
-
-    </header>
+    
 
     <section class="login-section">
 

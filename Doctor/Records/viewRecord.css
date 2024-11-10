@@ -49,31 +49,35 @@ nav ul li a:hover {
     transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transition */
 }
 
-main{
-    margin: 2rem;
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    gap: 2rem;
-}
+
 
 .profile{
-    display: flex;
+    position: absolute;
+    text-align: center;
+    height: 100%;
+    width: 400px;
+    background-color: #fff;
+    padding-top: 20px;
+   border-right: 3px solid rgb(214, 214, 214);
+    padding-right: 10px;
     flex-direction: column;
-    align-items: center;
-}
+    background-color: #ffffff;
+ }
+
 
 .profile-pic{
     border-radius: 50%;
     overflow: hidden;
-    width: 150px;
-    height: 150px;
+    width: 300px;
+    height: 300px;
     margin-bottom: 1rem;
+    margin-left: 50px;
 }
 
 .profile-pic img {
     width: 100%;
     height: auto;
+    align-self: center;
 }
 
 .profile-info h2 {
@@ -90,62 +94,245 @@ main{
     transition: transform 0.3s ease;
 }
 
-
 .records{
-    background-color: #e0e0e0;
-    padding:2rem;
-    border-radius: 8px;
-    width: 400px;
- 
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: calc(100% - 400px);
+    padding-top: 50px;
+    padding-left: 50px;
+    padding-right: 50px;
+    
 }
-
-.record-item {
-    margin-bottom: 1rem;
-}
-
-.record-item label {
-    display: block;
-    margin-bottom: 0.5rem;
-}
-
-.record-item input,
-.record-item textarea {
-    width: 100%;
-    padding: 0.5rem;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-}
-
-.record-controls {
+.search-form{
+  
+    width: 90%;
+    float: left;
+    max-width: 400px;
+    margin-bottom: 50px;
+    margin-top: 60px;
+    height: 60px;
+    background: #e0e0ee;
     display: flex;
-    justify-content: space-between;
-    margin-top: 1.5rem;
+    border-radius: 30px;
+  
 }
 
-.records:hover {
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: box-shadow 0.3s ease;
+.search-form input{
+    flex: 1;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 16px; /* Slightly smaller font */
+    padding: 0 20px; /* Adjusted padding */
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px; /* Rounded corners for input */
 }
 
-
-.record-controls button {
-    padding: 0.75rem 1.5rem;
-    background-color: #007d8c;
-    color: white;
-    border: none;
-    border-radius: 4px;
+.search-form button {
+    padding: 0 30px;
+    height: 100%;
+    background: #0e6dcc;;
+    color: #fff;
+    font-size: 16px;
+    border: 0;
+    outline: 0;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
     cursor: pointer;
 }
 
-.record-controls button:hover {
-    background-color: #005f6a;
-    transform: scale(1.05); /* Slightly increase size */
-    color: #ffffff;
-    transition: background-color 0.3s ease, transform 0.3s ease;
+.search-form button i {
+    font-size: 1.5em; /* Larger icon */
+    color: #fff;
+}
+.search-form button:hover{
+    background: #285a8e; /* Darker shade for hover */
+    color: #ffffff;     
+}
+.button {
+    display: inline-block;
+    padding: 10px 30px;
+    margin-top: 150px;
+    float: right;
+    background-color: #0e6dcc;
+    border: none;
+    border-radius: 20px;
+    text-decoration: none;
+    font-size: 16px;
+    color: white;
+    cursor: pointer;
 }
 
+.back-button {
+    display: inline-block;
+    background-color: #007ab7;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 16px;
+    position: absolute; /* Positioning the button absolutely */
+    top: 20px; /* Distance from the top of the page */
+    right: 20px; /* Distance from the right of the page */
+}
 
-label {
+.back-button:hover {
+    background-color: #0089A3;
+}
+
+h1{
+    margin-top: 200px;
+    margin-bottom: 10px;
+}
+#records-table {
+   
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#records-table th,
+#records-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
+}
+
+#records-table th {
+    background-color: #0e6dcc;;
+    color: white;
     font-weight: bold;
 }
 
+#records-table tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+#records-table tr:hover {
+    background-color: #e0f7fa;
+}
+
+
+.view-btn-cell {
+    text-align: right;
+}
+
+.view-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #00A5B7;
+}
+
+.view-btn:hover .view-icon {
+    color: #00A5B7;
+}
+
+.view-icon {
+    font-size: 1.5em;
+    color: #00A5B7;
+}
+
+
+
+
+/* Profile Picture and Name Styling */
+.patient-info {
+    display: flex;
+    align-items: center;
+}
+/* Modal Styling */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background-color: #f9f9f9;
+    padding: 30px;
+    border-radius: 10px;
+    width: 80%;  /* Larger width */
+    max-width: 800px;  /* Increased max-width */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    overflow-y: auto;  /* Add scroll for lengthy content */
+    max-height: 90vh;  /* Limit height for scrollable content */
+}
+
+.close {
+    float: right;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #aaa;
+}
+
+.close:hover {
+    color: #000;
+}
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-content label {
+    margin-bottom: 5px;
+    font-weight: bold;
+    color: #333;
+}
+.modal-content textarea {
+    margin-bottom: 5px;
+    width: 100%;
+    height:300px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-content input[type="text"], .modal-content input[type="number"] {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 100%;
+    font-size: 1em;
+}
+
+.submit-btn, .close-btn {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+}
+
+.submit-btn {
+    background-color: #4c6aaf;
+    color: white;
+}
+
+.close-btn {
+    background-color: #ccc;
+    color: #333;
+    margin-top: 10px;
+}
+
+.submit-btn:hover {
+    background-color: #4545a0;
+}
+
+.close-btn:hover {
+    background-color: #bbb;
+}

@@ -60,39 +60,49 @@
         <h1>Login</h1>
         <br>
         <?php
-session_start(); // Start the session to store user data
+session_start(); // Start the session
 
 if (isset($_POST['login'])) {
     $email = $_POST["Email"];
     $password = $_POST["password"];
 
-    require_once "../registerForm/database.php";
-    $sql = "SELECT * FROM patients WHERE Email = '$email'";
-    $result = mysqli_query($conn, $sql);
-    $patient = mysqli_fetch_assoc($result);
+    require_once "database.php";
 
-    if ($patient) {
-        if (password_verify($password, $patient["EncryptedPassword"])) {
+    // Use a prepared statement to prevent SQL injection
+    $stmt = $conn->prepare("SELECT * FROM Patients WHERE Email = ?");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($result && $result->num_rows > 0) {
+        $patient = $result->fetch_assoc();
+        
+        // Compare plain text passwords directly
+        if ($password === $patient["EncryptedPassword"]) {
             // Store user details in session variables
-            $_SESSION['Patient_id'] = $patient['Patient_id']; // Assuming 'id' is the user's unique identifier
+            $_SESSION['Patient_id'] = $patient['Patient_id'];
             $_SESSION['email'] = $patient['Email'];
             $_SESSION['Fullname'] = $patient['Fullname'];
             $_SESSION['Contact_number'] = $patient['Contact_number'];
-           // Store the profile picture path in the session
-           $_SESSION['Profile_picture_path'] = $patient['Profile_picture_path'];
+            $_SESSION['Profile_picture_path'] = $patient['Profile_picture_path'];
 
-            
             // Redirect to profile view page
             header("Location: ../patientView/Patientview.php");
             exit();
         } else {
-            echo "<div class='alert-danger'>Password does not exist</div>";
+            echo "<div class='alert-danger'>Incorrect password</div>";
         }
     } else {
         echo "<div class='alert-danger'>Email does not exist</div>";
     }
+
+    // Close the statement and database connection
+    $stmt->close();
+    $conn->close();
 }
 ?>
+
+
 
         <div class="input-group">
           <form action="./Patient.php" method="post">

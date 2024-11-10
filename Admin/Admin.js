@@ -139,7 +139,7 @@ document.getElementById('upload-pic').addEventListener('change', function(event)
 });
 
 // Close the modal
-document.querySelector('.close').onclick = function() {
+document.querySelector('.closeDoctorModal').onclick = function() {
     document.getElementById('doctorModal').style.display = "none";
 }
 
@@ -177,5 +177,23 @@ uploadPicInput.addEventListener("change", function() {
         reader.readAsDataURL(file);
     }
 });
+
+
+function openPatientModal(patient) {
+    console.log(patient); // Log the patient object to verify data
+    document.getElementById('PatientprofilePicture').src = 'images/' + patient.Profile_picture_path;
+    document.getElementById('fullname1').value = patient.Fullname || ''; // Ensure fields have fallback if data is missing
+    document.getElementById('Age1').value = patient.Age || '';
+    document.getElementById('Gender1').value = patient.Gender || '';
+    document.getElementById('contact_number1').value = patient.Contact_number || '';
+    document.getElementById('email1').value = patient.Email || '';
+
+    document.getElementById('PatientModal').style.display = "block";
+}
+
+
+    document.querySelector('.closePatientModal').onclick = function() {
+        document.getElementById('PatientModal').style.display = "none";
+    };
 
 

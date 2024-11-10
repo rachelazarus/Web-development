@@ -37,86 +37,157 @@ body {
     border-radius: 20px;
 }
 
+
 .navbar ul li a:hover {
     background-color: #006978;
 }
 
 
-/* Main Container */
 .container {
-
-    display: flex;
+    width: 90%;
+    margin: auto;
     padding: 20px;
-    max-width: 1200px;
-    margin: 70px auto;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
 }
 
-/* Profile Section */
-.profile {
-    flex: 1;
-    text-align: center;
-    padding-right: 40px;
-    border-right: 1px solid #ddd;
-}
-
-.profile-img {
-    width: 300px;
-    height: 300px;
-    border-radius: 50%;
+/* Section headers */
+.appointments-section h2 {
+    color: #333;
+    text-align: left;
     margin-bottom: 15px;
+    padding-bottom: 5px;
+  
 }
 
-h2 {
-    font-size: 1.5em;
-    margin-bottom: 10px;
+
+
+/* Alternate row colors */
+tr:nth-child(even) {
+    background-color: #e6f7ff;
 }
 
-.contact-info {
-    font-size: 1.2em;
-    margin-bottom: 10px;
+/* Cancel button styling */
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 40px;
 }
 
-/* Appointment Section */
-.appointment {
-    flex: 2;
-    padding-left: 40px;
+th,td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e0e0e0;
+    color: #333;
 }
-
-.appointment h3 {
-    font-size: 1.4em;
-    margin-bottom: 10px;
-}
-
-.description-box {
-    background-color: #0097A7;
-    padding: 20px;
-    border-radius: 10px;
+th {
+    background-color: #4c7daf;
     color: white;
+    font-weight: bold;
+}
+
+ tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+ tr:hover {
+    background-color: #e0f7fa;
+}
+.search-form{
+  
+    width: 90%;
+    float: left;
+    max-width: 400px;
+    margin-bottom: 50px;
+    margin-top: 90px;
+    height: 60px;
+    background: #e0e0ee;
+    display: flex;
+    border-radius: 30px;
+  
+}
+.back-button {
+    display: inline-block;
+    background-color: #007ab7;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 10px;
+    margin-bottom: 50px;
+    font-size: 16px;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.back-button:hover {
+    background-color: #0089A3;
+}
+
+
+/* Align Search and Filter Buttons */
+.appointments-filter {
+    display: flex;
+    justify-content: space-between;
     margin-bottom: 20px;
 }
 
-.appointment-time {
-    background-color: #78909C;
-    padding: 20px;
-    border-radius: 10px;
-    text-align: center;
-    color: white;
+ .filter-form {
+    display: flex;
+    align-items: center;
+    margin: 0;
+}
+.search-form{
+  
+    width: 90%;
+    max-width: 400px;
+    margin-right: 80px;
+    height: 60px;
+    background: #e0e0ee;
+    display: flex;
+    align-items: center;
+    border-radius: 30px;
+    margin-top: 80px;
 }
 
-.cancel-button {
-    background-color: #FF5252;
-    border: none;
-    padding: 10px 30px;
-    color: white;
-    border-radius: 20px;
-    margin-top: 20px;
+.search-form input{
+    flex: 1;
+    height: 100%;
+    border: 0;
+    outline: 0;
+    background: transparent;
+    font-size: 16px; /* Slightly smaller font */
+    padding: 0 20px; /* Adjusted padding */
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px; /* Rounded corners for input */
+}
+
+.search-form button{
+    padding: 0 30px;
+    height: 100%;
+    background:#285a8e; ;
+    color: #000000;
+    font-size: 16px;
+    border: 0;
+    outline: 0;
+    border-top-right-radius:30px;
+    border-bottom-right-radius: 30px;
     cursor: pointer;
-    font-size: 1em;
+}
+.search-form button:hover{
+    background: #102c49; /* Darker shade for hover */
+    color: #ffffff;     
 }
 
-.cancel-button:hover {
-    background-color: #D32F2F; /* Change to a darker red on hover */
+.filter-form label {
+    margin-right: 10px;
 }
+
+.filter-form input {
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+

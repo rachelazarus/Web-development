@@ -1,7 +1,6 @@
 <?php
 session_start();
-include("C:/xampp/htdocs/Doctor/DBconnect.php");
-
+include("connect.php");
 
 // Fetch total number of doctors
 $doctor_query = "SELECT COUNT(*) AS total_doctors FROM doctors"; // Assuming your doctors table is named 'doctors'
@@ -15,7 +14,7 @@ $patient_result = mysqli_query($conn, $patient_query);
 $patient_data = mysqli_fetch_assoc($patient_result);
 $total_patients = $patient_data['total_patients'];
 
-$Appointments_query = "SELECT COUNT(*) AS total_appointments FROM appointments"; // Assuming your patients table is named 'patients'
+$Appointments_query = "SELECT COUNT(*) AS total_appointments FROM apointments"; // Assuming your patients table is named 'patients'
 $appointment_result = mysqli_query($conn, $Appointments_query);
 $appointment_data = mysqli_fetch_assoc($appointment_result);
 $total_appointments = $appointment_data['total_appointments'];
@@ -32,7 +31,7 @@ $data = json_decode(file_get_contents("php://input"));
 // Query to fetch today's appointments
 $today_appointments_query = "
     SELECT p.Fullname AS patient_name, d.Fullname AS doctor_name, a.TimeSlot 
-    FROM appointments a 
+    FROM apointments a 
     JOIN patients p ON a.patient_id = p.Patient_id 
     JOIN doctors d ON a.doctor_id = d.Doctors_id 
     WHERE a.Year = '$today_year' AND a.Month = '$today_month' AND a.Day = '$today_day'
@@ -44,8 +43,8 @@ $today_appointments_result = mysqli_query($conn, $today_appointments_query);
 
 // Fetch all appointments
 $appointmentsall_query = "
-    SELECT a.Appointment_ID, a.Year, a.Month, a.Day, a.TimeSlot, p.Fullname AS patient_name, d.Fullname AS doctor_name 
-    FROM appointments a 
+    SELECT a.Apointment_ID, a.Year, a.Month, a.Day, a.TimeSlot, p.Fullname AS patient_name, d.Fullname AS doctor_name 
+    FROM apointments a 
     JOIN patients p ON a.patient_id = p.Patient_id 
     JOIN doctors d ON a.doctor_id = d.Doctors_id";
 $appointments_result = mysqli_query($conn, $appointmentsall_query);
@@ -54,6 +53,9 @@ $appointments_result = mysqli_query($conn, $appointmentsall_query);
 $doctors_query = "
     SELECT * FROM doctors";
 $doctors_result = mysqli_query($conn, $doctors_query);
+$patients_query = "
+    SELECT * FROM patients";
+$patients_result = mysqli_query($conn, $patients_query);
 
 
 ?>
@@ -68,7 +70,7 @@ $doctors_result = mysqli_query($conn, $doctors_query);
     <link rel="stylesheet" href="Admin.css" />
 </head>
 
-
+<body>
     <section class="header">
         <div class="logo">
             <i class="ri-menu-line icon icon-0 menu"></i>
@@ -118,7 +120,7 @@ $doctors_result = mysqli_query($conn, $doctors_query);
                     </a>
                 </li>
                 <li>
-                    <a href="Main menu.html">
+                    <a href="Login_page.php">
                         <span class="icon icon-8"><i class="ri-logout-box-r-line"></i></span>
                         <span class="sidebar--item">Logout</span>
                     </a>
@@ -321,56 +323,51 @@ $doctors_result = mysqli_query($conn, $doctors_query);
 
         </div>
 
-        
-    </div>
-<!-- Pateints-View-->
-<div class="main--content" id="patients-view" style="display: none;">
-    <div class="search">
-        <input type="text" id="patient-search" placeholder="Search patients...">
-        <button><i class="ri-search-2-line"></i></button>
-    </div>
-    <div class="add-patient">
+        <!-- Pateints-View-->
+        <div class="main--content" id="patients-view" style="display: none;">
+        <div class="search">
+           <input type="text" id="patient-search" placeholder="Search patients...">
+            <button><i class="ri-search-2-line"></i></button>
+        </div>
+
+       <div class="add-patient">
         <a href="AddPatientPage.php"><button class="add-patient-btn"><i class="ri-add-line add"></i> Add Patient</button></a>
     </div>
-    
-    <!-- Start of the table -->
+
     <table>
         <thead>
             <tr>
-                <th>Name</th>
+            <th>Name</th>
                 <th>Age</th>
+                <th>Gender</th>
                 <th>Contact</th>
-                <th>Email</th>
-                <th></th>
             </tr>
         </thead>
         <tbody>
-            <!-- Table rows with patient data will go here -->
-        </tbody>
-    </table>
-</div>
-        <tbody>
-            <?php while($patient = mysqli_fetch_assoc($patient_result)): ?>
+            <?php while($patient = mysqli_fetch_assoc($patients_result)): ?>
             <tr>
 
-                <td><?php echo $patient['Fullname']; ?></td>
-                <td><?php echo $patient['Email']; ?></td>
+            <td><?php echo $patient['Fullname']; ?></td>
+                <td><?php echo $patient['Age']; ?></td>
+                <td><?php echo $patient['Gender']; ?></td>
                 <td><?php echo $patient['Contact_number']; ?></td>
                 
                 <td class="deleteth">
                   
                      <div class="deletediv">
-                     <button class="view-btn" onclick='openPatientModal(<?php echo json_encode($patient); ?>)'  data-id="<?php echo $patient['Patients_id']; ?>" title="View Patient">
-                            <i class="ri-delete-bin-line delete"></i>
+                     <button class="delete-btn" data-id="<?php echo $patient['Patient_id']; ?>" data-type="patient" title="Delete Patient">
+                      <i class="ri-delete-bin-line delete"></i>
                           </button>
-                    
+            </div>
                 </td>
                 <td >
-                </div >
+            
                     <div class = "viewdiv">
+                    <button class="view-btn" onclick='openPatientModal(<?php echo json_encode($patient); ?>)'  data-id="<?php echo $patient['Patient_id']; ?>" title="View Patient">
                         <i class="ri-eye-line view"></i>
                     </button>
                      </div>
+            </div>
                 </td>
             </tr>
             <?php endwhile; ?>
@@ -380,16 +377,19 @@ $doctors_result = mysqli_query($conn, $doctors_query);
 
     </div>
 
+            </div>
+        </div>
+      
 
-        </div>
-        </div>
+
+        <div class="main--content" id="support-view" style="display: none;">
+            <h2>Support</h2>
            
-        
-                
+        </div>
     <!-- Modal Structure for Viewing Doctor Information -->
 <div id="doctorModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="closeDoctorModal">&times;</span>
         <h2>Doctor's Information</h2>
         <form   id="doctorForm"  enctype="multipart/form-data">
         <div class="input-groupReg">
@@ -400,7 +400,7 @@ $doctors_result = mysqli_query($conn, $doctors_query);
                      </div>
             <div class="input-groupReg">
             <label for="fullname">Fullname:</label>
-            <input type="text" id="fullname" name="fullname">
+            <p type="text" id="fullname" name="fullname">
             </div> 
             <div class="input-groupReg">
             <label for="age">Age:</label>
@@ -440,54 +440,45 @@ $doctors_result = mysqli_query($conn, $doctors_query);
         </form>
     </div>
 </div>
+
 </section>
 
-
-    <script src="Admin.js"></script>
-
-
-
- <!-- Modal Structure for Viewing Patient Information -->
- <div id="PatientModal" class="modal">
+<div id="PatientModal" class="modal">
     <div class="modal-content">
-        <span class="close">&times;</span>
+        <span class="closePatientModal">&times;</span>
         <h2>Patient's Information</h2>
         <form   id="patientForm"  enctype="multipart/form-data">
         <div class="input-groupReg">
            <label for="upload-pic"> Profile Picture</label>
            <div class="profile-pic-container">
-                <img id="profilePicture" src="" alt="Patient Image" onclick="document.getElementById('upload-pic').click()" />
-           <input type="file" id="upload-pic" name="profile_picture" accept="image/*" style="display: none;" />
-                     </div>
+                <img id="PatientprofilePicture" src="" alt="Patient Image"  />
+        
+
+            </div>
             <div class="input-groupReg">
             <label for="fullname">Fullname:</label>
-            <input type="text" id="fullname" name="fullname">
+            <input type="text" id="fullname1" name="fullname">
             </div> 
-           
-        
+            <div class="input-groupReg">
+            <label for="Age1">Age:</label>
+            <input type="text" id="Age1" name="Age1">
+            </div>
+            <div class="input-groupReg">
+            <label for="Gender1">Gender:</label>
+            <input type="text" id="Gender1" name="Age1">
+            </div>
             <div class="input-groupReg">
             <label for="contact_number">Contact Number:</label>
-            <input type="text" id="contact_number" name="contact_number">
+            <input type="text" id="contact_number1" name="contact_number">
             </div>
             <div class="input-groupReg">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email">
+            <input type="email" id="email1" name="email">
             </div>
-            <div class="input-groupReg">
-            <label for="hire_date">Password</label>
-            <input type="date" id="hire_date" name="hire_date">
-            </div>
-          
-            <div class="input-groupReg">
-            <input type="hidden" id="patient_id" name="patient_id">
-            <button  class= "btn"type="button" id="saveChanges">Save Changes</button>
-            </div>
+        
+        
         </form>
     </div>
-</div>
-</section>
-
-
     <script src="Admin.js"></script>
 
 </body>
